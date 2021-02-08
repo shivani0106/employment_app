@@ -2,8 +2,11 @@ import 'package:employment_app/introduction/Introduction.dart';
 import 'package:flutter/material.dart';
 import 'package:employment_app/style/Style.dart';
 import 'auth/SignUp.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
