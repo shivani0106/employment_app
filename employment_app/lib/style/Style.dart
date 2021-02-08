@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 /// Colors */
 final whiteColor = const Color(0xFFFFFFFF);
 final backprimaryColor = const Color(0xFFe7f2ec);
+final secondryBackColor = const Color(0xFFe5e7e9);
 final primaryColor = const Color(0xFF001652);
 final secondryColor = const Color(0xFF006080);
 
@@ -24,12 +25,84 @@ double screenWidth(BuildContext context) {
 
 /// Text Style  */
 
-TextStyle regularPrimaryColor() {
+TextStyle regularBlueColor() {
+  return TextStyle(
+      fontFamily: 'SourceSansPro-Regular',
+      fontSize: 18,
+      fontWeight: FontWeight.w400,
+      color: Colors.blueAccent);
+}
+
+TextStyle regulargreyColor() {
+  return TextStyle(
+      fontFamily: 'SourceSansPro-Regular',
+      fontSize: 18,
+      fontWeight: FontWeight.w400,
+      color: Colors.black45);
+}
+
+TextStyle regularwhiteColorBold() {
   return TextStyle(
       fontFamily: 'SourceSansPro-Regular',
       fontSize: 16,
-      fontWeight: FontWeight.w300,
-      color: Colors.cyan);
+      fontWeight: FontWeight.w600,
+      color: whiteColor);
+}
+
+TextStyle regularprimaryColorBold() {
+  return TextStyle(
+      fontFamily: 'SourceSansPro-Regular',
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      color: primaryColor);
+}
+
+TextStyle largewhiteColorBold() {
+  return TextStyle(
+      fontFamily: 'SourceSansPro-Regular',
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+      color: whiteColor);
+}
+
+TextStyle largePrimaryColorBold() {
+  return TextStyle(
+      fontFamily: 'SourceSansPro-Bold',
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      color: primaryColor);
+}
+
+TextStyle smallPrimaryColorSemiBold() {
+  return TextStyle(
+      fontFamily: 'SourceSansPro-SemiBold',
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      color: primaryColor);
+}
+
+TextStyle smallPrimaryColorRegular() {
+  return TextStyle(
+      fontFamily: 'SourceSansPro-Regular',
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      color: primaryColor);
+}
+
+TextStyle smallBlackColorRegular() {
+  return TextStyle(
+      fontFamily: 'SourceSansPro-Regular',
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      color: Colors.black);
+}
+
+TextStyle largePrimaryColorsemiBold() {
+  return TextStyle(
+      fontFamily: 'SourceSansPro-SemiBold',
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      color: primaryColor);
 }
 
 TextStyle extralargePrimaryColorSemiBold() {
