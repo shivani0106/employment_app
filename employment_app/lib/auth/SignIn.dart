@@ -26,10 +26,12 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: primaryColor,
+          iconTheme: IconThemeData(color: primaryColor),
+          automaticallyImplyLeading: true,
+          backgroundColor: whiteColor,
           title: Text(
             'Sign In',
-            style: largewhiteColorBold(),
+            style: largePrimaryColorBold(),
           ),
         ),
         body: SingleChildScrollView(
