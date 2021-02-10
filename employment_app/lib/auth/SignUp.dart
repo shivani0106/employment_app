@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:employment_app/style/Style.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUp extends StatefulWidget {
   SignUp({Key key}) : super(key: key);
@@ -10,6 +12,13 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
+
+  String email;
+  String password;
+  // Firebase Auth
+  final _auth = FirebaseAuth.instance;
+  bool showSpinner = false;
+
   FocusNode _focusNodeOne = FocusNode();
   FocusNode _focusNodeTwo = FocusNode();
   bool passwordVisiable;

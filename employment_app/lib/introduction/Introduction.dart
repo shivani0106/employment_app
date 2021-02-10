@@ -1,11 +1,11 @@
 import 'package:employment_app/auth/SignIn.dart';
 import 'package:employment_app/auth/SignUp.dart';
 import 'package:employment_app/style/Style.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class Introduction extends StatefulWidget {
-  Introduction({Key key}) : super(key: key);
-
   @override
   _IntroductionState createState() => _IntroductionState();
 }
