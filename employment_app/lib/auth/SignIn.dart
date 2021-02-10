@@ -13,6 +13,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  final String countryCode = '+91';
   final _formKey = GlobalKey<FormState>();
   FocusNode _focusNodeOne = FocusNode();
   FocusNode _focusNodeTwo = FocusNode();
@@ -24,6 +25,7 @@ class _SignInState extends State<SignIn> {
 
   Future<bool> loginUser(String phone, BuildContext context) async {
     FirebaseAuth _auth = FirebaseAuth.instance;
+
     _auth.verifyPhoneNumber(
       phoneNumber: phone,
       timeout: Duration(seconds: 60),
@@ -160,7 +162,7 @@ class _SignInState extends State<SignIn> {
                         focusNode: _focusNodeOne,
                         keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
-                          prefix: Text("+91    "),
+                          prefix: Text("$countryCode   "),
                           labelText: 'Mobile No.',
                           labelStyle: _focusNodeOne.hasFocus
                               ? regularBlueColor()
@@ -217,7 +219,8 @@ class _SignInState extends State<SignIn> {
                           // if (_formKey.currentState.validate()) {
 
                           // }
-                          final phoneNumber = _phoneController.text.trim();
+                          final phoneNumber =
+                              countryCode + _phoneController.text.trim();
                           print(phoneNumber);
                           loginUser(phoneNumber, context);
                         },
