@@ -1,3 +1,4 @@
+
 import 'package:employment_app/introduction/Introduction.dart';
 import 'package:flutter/material.dart';
 import 'package:employment_app/style/Style.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Employment_app',
       theme: ThemeData(
         scaffoldBackgroundColor: secondryBackColor,
         primarySwatch: Colors.blue,
