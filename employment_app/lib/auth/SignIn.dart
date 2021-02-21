@@ -1,5 +1,4 @@
 import 'package:employment_app/home_screen.dart';
-import 'package:employment_app/introduction/Introduction.dart';
 import 'package:employment_app/style/Style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
