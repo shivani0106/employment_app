@@ -1,7 +1,7 @@
+import 'package:employment_app/style/Style.dart';
+import 'package:employment_app/widgets/NavigationDrawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-FirebaseAuth _auth = FirebaseAuth.instance;
 
 class HomeScreen extends StatefulWidget {
   final User user;
@@ -12,21 +12,65 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  void signOut() {
-    _auth.signOut();
-    Navigator.pop(context);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(''),
-      ),
-      body: FlatButton(
-        child: Text('SignOut'),
-        onPressed: signOut,
-      ),
-    );
+        appBar: AppBar(
+          backgroundColor: primaryColor,
+          //  automaticallyImplyLeading: false,
+          title: Text('Home page'),
+        ),
+        drawer: NavigationDrawer(),
+        body: ListView.builder(
+            itemCount: 10,
+            itemBuilder: (BuildContext context, int i) {
+              return Container(
+                  padding: EdgeInsets.fromLTRB(screenWidth(context) * 0.02, 0,
+                      screenWidth(context) * 0.02, 0),
+                  height: 150,
+                  width: screenWidth(context),
+                  child: Card(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                            padding: EdgeInsets.only(
+                                left: screenWidth(context) * 0.03),
+                            child: Text(
+                              'Painter',
+                              style: largePrimaryColorsemiBold(),
+                            )),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(
+                              screenWidth(context) * 0.02,
+                              screenHeight(context) * 0.01,
+                              screenWidth(context) * 0.02,
+                              screenHeight(context) * 0.01),
+                          child: Text(
+                            ' Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,',
+                            textAlign: TextAlign.justify,
+                          ),
+                        ),
+                        GestureDetector(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Icon(Icons.visibility, size: 20),
+                            SizedBox(width: screenWidth(context) * 0.02),
+                            Container(
+                                // decoration: BoxDecoration(color: primaryColor),
+                                padding: EdgeInsets.only(
+                                    right: screenWidth(context) * 0.03),
+                                alignment: Alignment.bottomRight,
+                                child: Text(
+                                  'View',
+                                  style: regularprimaryColorBold(),
+                                ))
+                          ],
+                        ))
+                      ],
+                    ),
+                  ));
+            }));
   }
 }

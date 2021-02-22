@@ -1,9 +1,8 @@
+import 'package:employment_app/globals/validation.dart';
 import 'package:employment_app/home_screen.dart';
-import 'package:employment_app/introduction/Introduction.dart';
 import 'package:employment_app/style/Style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'ForgotPassword.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -19,7 +18,7 @@ class _SignInState extends State<SignIn> {
   final String countryCode = '+91';
   final _formKey = GlobalKey<FormState>();
   FocusNode _focusNodeOne = FocusNode();
-  FocusNode _focusNodeTwo = FocusNode();
+
   bool passwordVisiable;
   bool showSpinner = false;
 
@@ -64,6 +63,7 @@ class _SignInState extends State<SignIn> {
             return AlertDialog(
               title: Text('Enter OTP'),
               content: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   TextField(
                     controller: _codeController,
@@ -161,215 +161,181 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          iconTheme: IconThemeData(color: primaryColor),
-          automaticallyImplyLeading: true,
-          backgroundColor: whiteColor,
-          title: Text(
-            'Sign In',
-            style: largePrimaryColorBold(),
-          ),
-        ),
-        body: ModalProgressHUD(
-          inAsyncCall: showSpinner,
-          child: SingleChildScrollView(
-              child: Container(
-                  height: 500,
-                  margin: EdgeInsets.only(
-                      left: screenWidth(context) * 0.1,
-                      right: screenWidth(context) * 0.1,
-                      top: screenHeight(context) * 0.1,
-                      bottom: screenHeight(context) * 0.1),
-                  child: Form(
-                    key: _formKey,
+        backgroundColor: backprimaryColor,
+        body: Stack(children: [
+          SingleChildScrollView(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(
+                        top: screenHeight(context) * 0.05,
+                        left: screenWidth(context) * 0.04),
+                    color: primaryColor,
+                    height: screenHeight(context) * 0.6,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   children: [
-                        //     Container(
-                        //       height: 40,
-                        //       width: screenWidth(context) / 4,
-                        //       child: Image.asset(
-                        //         'lib/assets/images/appLogo.jpg',
-                        //         fit: BoxFit.contain,
-                        //       ),
-                        //     ),
-                        //     Container(
-                        //       child: Text(
-                        //         'Employment',
-                        //         style: largePrimaryColorsemiBold(),
-                        //       ),
-                        //     )
-                        //   ],
-                        // ),
-
-                        ///Mobile no ****************************************************************************
-                        TextFormField(
-                          validator: validateMobile,
-                          autofocus: false,
-                          controller: _phoneController,
-                          focusNode: _focusNodeOne,
-                          keyboardType: TextInputType.phone,
-                          decoration: InputDecoration(
-                            prefix: Text("$countryCode   "),
-                            labelText: 'Mobile No.',
-                            labelStyle: _focusNodeOne.hasFocus
-                                ? regularBlueColor()
-                                : regulargreyColor(),
-                            //  errorText: validateMobile.toString()
-                          ),
-                        ),
-
-                        /// Password*************************************************************************************
-                        // TextFormField(
-                        //   validator: validatePassword,
-                        //   autofocus: false,
-                        //   focusNode: _focusNodeTwo,
-                        //   decoration: InputDecoration(
-                        //     suffixIcon: IconButton(
-                        //         icon: passwordVisiable == true
-                        //             ? Icon(Icons.visibility)
-                        //             : Icon(Icons.visibility_off),
-                        //         onPressed: () {
-                        //           setState(() {
-                        //             passwordVisiable = !passwordVisiable;
-                        //           });
-                        //         }),
-                        //     labelText: 'Password',
-                        //     labelStyle: _focusNodeTwo.hasFocus
-                        //         ? regularBlueColor()
-                        //         : regulargreyColor(),
-                        //   ),
-                        //   obscureText: !passwordVisiable,
-                        // ),
-
-                        // ///Forgot password***************************************************************************
-                        // GestureDetector(
-                        //   child: Container(
-                        //     alignment: Alignment.centerRight,
-                        //     child: Text(
-                        //       'Forgot Password?',
-                        //       style: smallPrimaryColorRegular(),
-                        //     ),
-                        //   ),
-                        //   onTap: () => Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //           builder: (context) => ForgotPassword())),
-                        // ),
-
-                        /// Sign In button *************************************************************************
-                        FlatButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0)),
-                          color: primaryColor,
-                          textColor: whiteColor,
-                          onPressed: () {
-                            // if (_formKey.currentState.validate()) {
-
-                            // }
-                            setState(() {
-                              showSpinner = true;
-                            });
-                            final phoneNumber =
-                                countryCode + _phoneController.text.trim();
-                            print(phoneNumber);
-                            loginUser(phoneNumber, context);
-                            setState(() {
-                              showSpinner = false;
-                            });
-                          },
-                          child: Text(
-                            'Sign In',
-                            style: regularwhiteColorBold(),
-                          ),
-                        ),
-
                         Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'OR',
-                              style: regularprimaryColorBold(),
-                            )),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            GestureDetector(
-                              onTap: signInWithGoogle,
-                              child: Container(
-                                height: 50,
-                                width: 100,
-                                child: Image.asset(
-                                    'lib/assets/images/google.png',
-                                    fit: BoxFit.contain),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                signInWithFacebook();
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => HomeScreen(),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                height: 45,
-                                width: 80,
-                                child: Image.asset(
-                                    'lib/assets/images/facebookLogo.png',
-                                    fit: BoxFit.contain),
-                              ),
-                            ),
-                          ],
+                          child:
+                              Text('WELCOME', style: extralargeWhiteSemiBold()),
                         ),
-                        GestureDetector(
-                            onTap: () {
-                              print(_auth.currentUser);
-
-                              signOutUser();
-                              print('Sign out');
-                              print(_auth.currentUser);
-                            },
-                            child: Container(
-                                alignment: Alignment.center,
-                                child: RichText(
-                                  text: TextSpan(
-                                      text: 'Don\'t have an account?',
-                                      style: smallBlackColorRegular(),
-                                      children: [
-                                        TextSpan(
-                                            text: 'Sign Out',
-                                            style: smallPrimaryColorSemiBold())
-                                      ]),
-                                )))
+                        Container(
+                            margin: EdgeInsets.only(
+                                right: screenWidth(context) * 0.1),
+                            child: Text(
+                              'To Employement Seeking App',
+                              style: largeWhiteSemiBold(),
+                            )),
                       ],
                     ),
-                  ))),
-        ));
-  }
+                  ),
+                  Container(height: screenHeight(context) * 0.4),
+                ]),
+          ),
+          Container(
+              alignment: Alignment.center,
+              child: ModalProgressHUD(
+                  inAsyncCall: showSpinner,
+                  child: SingleChildScrollView(
+                    child: Container(
+                        height: screenHeight(context) * 0.45,
+                        margin: EdgeInsets.only(
+                            left: screenWidth(context) * 0.1,
+                            right: screenWidth(context) * 0.1,
+                            top: screenHeight(context) * 0.1,
+                            bottom: screenHeight(context) * 0.1),
+                        padding: EdgeInsets.only(
+                            left: screenWidth(context) * 0.01,
+                            right: screenWidth(context) * 0.01,
+                            top: screenHeight(context) * 0.01,
+                            bottom: screenHeight(context) * 0.01),
+                        child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Form(
+                              key: _formKey,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  ///Mobile no ****************************************************************************
+                                  Container(
+                                    width: screenWidth(context) * 0.7,
+                                    margin: EdgeInsets.only(
+                                        left: screenWidth(context) * 0.02,
+                                        right: screenWidth(context) * 0.02),
+                                    child: TextFormField(
+                                      validator: validateMobile,
+                                      autofocus: false,
+                                      controller: _phoneController,
+                                      focusNode: _focusNodeOne,
+                                      keyboardType: TextInputType.phone,
+                                      decoration: InputDecoration(
+                                        prefix: Text("$countryCode "),
+                                        labelText: 'Mobile No.',
+                                        labelStyle: _focusNodeOne.hasFocus
+                                            ? regularBlueColor()
+                                            : regulargreyColor(),
+                                        //  errorText: validateMobile.toString()
+                                      ),
+                                    ),
+                                  ),
 
-  ///mobile number validation***********************************************************************
-  String validateMobile(String value) {
-    if (value.length == 0) return "Enter mobile number";
-    if (value.length != 10)
-      return "Mobile number must be 10 digit";
-    else
-      return null;
-  }
+                                  /// Sign In button *************************************************************************
+                                  FlatButton(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(18.0)),
+                                    color: primaryColor,
+                                    textColor: whiteColor,
+                                    onPressed: () {
+                                      if (_formKey.currentState.validate()) {
+                                        setState(() {
+                                          showSpinner = true;
+                                        });
+                                        final phoneNumber = countryCode +
+                                            _phoneController.text.trim();
+                                        print(phoneNumber);
+                                        loginUser(phoneNumber, context);
+                                        setState(() {
+                                          showSpinner = false;
+                                        });
+                                      }
+                                    },
+                                    child: Text(
+                                      'Sign In',
+                                      style: regularwhiteColorBold(),
+                                    ),
+                                  ),
 
-  ///Password validation ***************************************************************************
-  String validatePassword(String value) {
-    if (value.length == 0) return "Enter password number";
-    if (value.length <= 6) {
-      return "Password must be atleast 6 character";
-    } else {
-      return null;
-    }
+                                  Container(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'OR',
+                                        style: regularprimaryColorBold(),
+                                      )),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: signInWithGoogle,
+                                        child: Container(
+                                          height: 50,
+                                          width: 100,
+                                          child: Image.asset(
+                                              'lib/assets/images/google.png',
+                                              fit: BoxFit.contain),
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          signInWithFacebook();
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  HomeScreen(),
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          height: 45,
+                                          width: 80,
+                                          child: Image.asset(
+                                              'lib/assets/images/facebookLogo.png',
+                                              fit: BoxFit.contain),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  // GestureDetector(
+                                  //     onTap: () {
+                                  //       print(_auth.currentUser);
+
+                                  //       signOutUser();
+                                  //       print('Sign out');
+                                  //       print(_auth.currentUser);
+                                  //     },
+                                  //     child: Container(
+                                  //         alignment: Alignment.center,
+                                  //         child: RichText(
+                                  //           text: TextSpan(
+                                  //               text: 'Don\'t have an account?',
+                                  //               style: smallBlackColorRegular(),
+                                  //               children: [
+                                  //                 TextSpan(
+                                  //                     text: 'Sign Out',
+                                  //                     style:
+                                  //                         smallPrimaryColorSemiBold())
+                                  //               ]),
+                                  //         )))
+                                ],
+                              ),
+                            ))),
+                  )))
+        ]));
   }
 }
