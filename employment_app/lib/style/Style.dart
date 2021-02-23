@@ -97,6 +97,14 @@ TextStyle smallBlackColorRegular() {
       color: Colors.black);
 }
 
+TextStyle regularBlackColorRegular() {
+  return TextStyle(
+      fontFamily: 'SourceSansPro-Regular',
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      color: Colors.black);
+}
+
 TextStyle largePrimaryColorsemiBold() {
   return TextStyle(
       fontFamily: 'SourceSansPro-SemiBold',
@@ -105,20 +113,20 @@ TextStyle largePrimaryColorsemiBold() {
       color: primaryColor);
 }
 
-TextStyle extralargePrimaryColorSemiBold() {
+TextStyle extralargeWhiteSemiBold() {
   return TextStyle(
       fontFamily: 'SourceSansPro-Bold',
       fontStyle: FontStyle.italic,
       fontSize: 42,
       fontWeight: FontWeight.w500,
-      color: primaryColor);
+      color: Colors.white);
 }
 
-TextStyle largeSecondryColorSemiBold() {
+TextStyle largeWhiteSemiBold() {
   return TextStyle(
       fontFamily: 'SourceSansPro-SemiBold',
       fontStyle: FontStyle.italic,
       fontSize: 26,
       fontWeight: FontWeight.w100,
-      color: secondryColor);
+      color: Colors.white);
 }

@@ -1,9 +1,8 @@
-
 import 'package:employment_app/introduction/Introduction.dart';
 import 'package:flutter/material.dart';
 import 'package:employment_app/style/Style.dart';
-import 'auth/SignUp.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'auth/SignIn.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,8 +25,8 @@ class MyApp extends StatelessWidget {
       //home: Introduction(),
       initialRoute: '/',
       routes: {
-        '/': (context) => Introduction(),
-        '/signUp': (context) => SignUp()
+        '/': (context) => SignIn(),
+        // '/signUp': (context) => SignUp()
       },
     );
   }
