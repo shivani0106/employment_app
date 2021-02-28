@@ -28,7 +28,7 @@ double screenWidth(BuildContext context) {
 TextStyle regularBlueColor() {
   return TextStyle(
       fontFamily: 'SourceSansPro-Regular',
-      fontSize: 18,
+      fontSize: 20,
       fontWeight: FontWeight.w400,
       color: Colors.blueAccent);
 }

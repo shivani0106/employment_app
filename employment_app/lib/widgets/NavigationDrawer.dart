@@ -1,8 +1,8 @@
 import 'package:employment_app/auth/SignIn.dart';
 import 'package:employment_app/globals/validation.dart';
 import 'package:employment_app/home_screen.dart';
-import 'package:employment_app/screen/AddJob.dart';
 import 'package:employment_app/screen/Profile.dart';
+import 'package:employment_app/screen/addJob/AddPersonalDetails.dart';
 import 'package:employment_app/widgets/createDrawerBodyItems.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +24,8 @@ class NavigationDrawer extends StatelessWidget {
         craeteDrawerBodyItems(
             icons: Icons.add,
             text: 'Add Job',
-            onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) => AddJob()))),
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AddPersonalDetails()))),
         craeteDrawerBodyItems(
             icons: Icons.view_array,
             text: 'Find Job',
