@@ -1,3 +1,4 @@
+import 'package:employment_app/globals/Globals.dart';
 import 'package:employment_app/globals/validation.dart';
 import 'package:employment_app/home_screen.dart';
 import 'package:employment_app/style/Style.dart';
@@ -15,7 +16,6 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  final String countryCode = '+91';
   final _formKey = GlobalKey<FormState>();
   FocusNode _focusNodeOne = FocusNode();
 

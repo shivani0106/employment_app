@@ -18,7 +18,22 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           backgroundColor: primaryColor,
           //  automaticallyImplyLeading: false,
-          title: Text('Home page'),
+          title: Text('Job'),
+          actions: [
+            IconButton(
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                ),
+                onPressed: null),
+            IconButton(
+              icon: Icon(
+                Icons.filter_list,
+                color: Colors.white,
+              ),
+              onPressed: null,
+            ),
+          ],
         ),
         drawer: NavigationDrawer(),
         body: ListView.builder(

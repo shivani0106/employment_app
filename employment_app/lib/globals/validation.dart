@@ -19,6 +19,43 @@ String validatePassword(String value) {
   }
 }
 
+///Name Validation********************************************************************************
+String validateName(String value) {
+  if (value.isEmpty)
+    return "Enter Name";
+  else
+    return null;
+}
+
+///Email Validation*********************************************************************************
+String validateEmail(String value) {
+  Pattern pattern =
+      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+      r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+      r"{0,253}[a-zA-Z0-9])?)*$";
+  RegExp regExp = new RegExp(pattern);
+  if (value.isEmpty) return 'Enter email Address';
+  if (!regExp.hasMatch(value))
+    return 'Enter valid email Address';
+  else
+    return null;
+}
+
+///Address Validation********************************************************************************
+String validatreAddress(String value) {
+  if (value.isEmpty)
+    return "Enter Address";
+  else
+    return null;
+}
+
+String validateJob(String value) {
+  if (value.isEmpty)
+    return "Enter JOb Type";
+  else
+    return null;
+}
+
 FirebaseAuth _auth = FirebaseAuth.instance;
 
 void signOut() {
