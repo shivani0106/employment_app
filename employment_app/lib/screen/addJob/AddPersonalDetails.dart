@@ -105,7 +105,7 @@ class _AddPersonalDetailsState extends State<AddPersonalDetails> {
                     TextFormField(
                       controller: _addressController,
                       focusNode: addressNode,
-                      validator: validatreAddress,
+                      validator: validateAddress,
                       autofocus: false,
                       keyboardType: TextInputType.name,
                       decoration: InputDecoration(
@@ -120,16 +120,16 @@ class _AddPersonalDetailsState extends State<AddPersonalDetails> {
                         color: primaryColor,
                         onPressed: () {
                           if (_formKeyDetails.currentState.validate()) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AddJobDetails(
-                                          fristName: _fristnameController.text,
-                                          lastName: _lastnameController.text,
-                                          mobileNo: _mobilenoController.text,
-                                          email: _emailController.text,
-                                          address: _addressController.text,
-                                        )));
+//                            Navigator.push(
+//                                context,
+//                                MaterialPageRoute(
+//                                    builder: (context) => AddJobDetails(
+//                                          fristName: _fristnameController.text,
+//                                          lastName: _lastnameController.text,
+//                                          mobileNo: _mobilenoController.text,
+//                                          email: _emailController.text,
+//                                          address: _addressController.text,
+//                                        )));
                           }
                         },
                         child: Text(

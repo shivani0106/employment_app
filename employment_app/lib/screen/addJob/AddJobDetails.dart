@@ -1,46 +1,67 @@
+import 'package:employment_app/globals/Globals.dart';
 import 'package:employment_app/globals/validation.dart';
+import 'package:employment_app/my_packages/custom_country_state_city.dart';
 import 'package:employment_app/screen/addJob/Preview.dart';
 import 'package:employment_app/style/Style.dart';
+import 'package:employment_app/widgets/country_state_city.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AddJobDetails extends StatefulWidget {
-  AddJobDetails(
-      {this.fristName, this.lastName, this.mobileNo, this.email, this.address});
+  AddJobDetails();
 
-  final String fristName;
-  final String lastName;
-  final String address;
-  final String mobileNo;
-  final String email;
+
   @override
   _AddJobDetailsState createState() => _AddJobDetailsState();
 }
 
 class _AddJobDetailsState extends State<AddJobDetails> {
   final _formJobDetails = GlobalKey<FormState>();
+
   //**********************Nodes******************************************** */
   FocusNode jobType = FocusNode();
   FocusNode jobDiscription = FocusNode();
+  FocusNode pinCodeNode = FocusNode();
+  FocusNode jobAddress = FocusNode();
 
   //*********************Controller *******************************************
-  final _typeOFJobController = new TextEditingController();
-  final _discriptionController = new TextEditingController();
+  //final _typeOFJobController = new TextEditingController();
+  final _jobdiscriptionController = new TextEditingController();
+  final _pinCodeController = new TextEditingController();
+  final _jobAddressController = new TextEditingController();
 
   //***************************No of people needed */
   List<String> noOfPeople = ['1', '2', '3', '4', '5', '5 to 10', 'Above 10'];
-  String selectPeople = '1';
+  String selectPeople;
 
   //*************************Time ******************** */
   List<String> time = [
-    '1 to 2 hour',
-    '2 to 5 hour',
-    '5 to 8 hour',
-    '10 to 12 hours',
-    '1 Day',
-    '2 Day',
-    'More than 2 Days'
+    'Less than 8 hour',
+    '8 hour',
+    "More than 8 hour",
   ];
   String selectTime;
+
+  //*************************job type ******************** */
+
+
+  List<String> typeOfJob = [
+    'Painter',
+    'abcd',
+    'efpydgdf',
+    'sdsahjkasd',
+    'hsfjdjfksd',
+    'fjdfhds'
+  ];
+
+  String jobOfType;
+
+  //*************************select_country_state_city*****************/
+
+  String countryValue;
+  String stateValue;
+  String cityValue;
+
 
   @override
   Widget build(BuildContext context) {
@@ -51,118 +72,243 @@ class _AddJobDetailsState extends State<AddJobDetails> {
         ),
         body: SingleChildScrollView(
             child: Container(
-          padding: EdgeInsets.fromLTRB(
-              screenWidth(context) * 0.05,
-              screenHeight(context) * 0.03,
-              screenWidth(context) * 0.05,
-              screenHeight(context) * 0.03),
-          child: Form(
-              key: _formJobDetails,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  //**************************Type of job************************ */
-                  TextFormField(
-                    controller: _typeOFJobController,
-                    focusNode: jobType,
-                    validator: validateJob,
-                    autofocus: false,
-                    autocorrect: true,
-                    keyboardType: TextInputType.name,
-                    decoration: InputDecoration(labelText: 'Type of Job'),
-                    textInputAction: TextInputAction.next,
-                  ),
-                  SizedBox(
-                    height: screenHeight(context) * 0.03,
-                  ),
-                  //**************Select No of Peopple*************** */
-                  Container(
-                    child: Text('Select No of People'),
-                  ),
-                  SizedBox(
-                    height: screenHeight(context) * 0.01,
-                  ),
-                  DropdownButton(
-                      isExpanded: true,
-                      iconDisabledColor: Colors.black,
-                      iconEnabledColor: primaryColor,
-                      hint: Text('Select No of People'),
-                      value: selectPeople,
-                      items: noOfPeople.map((e) {
-                        return DropdownMenuItem(value: e, child: new Text(e));
-                      }).toList(),
-                      onChanged: (newValue) {
-                        setState(() {
-                          selectPeople = newValue;
-                        });
-                      }),
-                  //******************Select Time************************* */
-                  SizedBox(
-                    height: screenHeight(context) * 0.03,
-                  ),
-                  Container(
-                    child: Text('Select Time'),
-                  ),
-                  SizedBox(
-                    height: screenHeight(context) * 0.01,
-                  ),
-                  DropdownButton(
-                      isExpanded: true,
-                      iconDisabledColor: Colors.black,
-                      iconEnabledColor: primaryColor,
-                      hint: Text('Select Time'),
-                      value: selectTime,
-                      items: time.map((e) {
-                        return DropdownMenuItem(value: e, child: new Text(e));
-                      }).toList(),
-                      onChanged: (newValue) {
-                        setState(() {
-                          selectTime = newValue;
-                        });
-                      }),
+              padding: EdgeInsets.fromLTRB(
+                  screenWidth(context) * 0.05,
+                  screenHeight(context) * 0.03,
+                  screenWidth(context) * 0.05,
+                  screenHeight(context) * 0.03),
+              child: Form(
+                  key: _formJobDetails,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      //**************************Type of job************************ */
+                      Container(
+                        child: Text(
+                          'Type of Job',
+                          style: regularPrimaryColorSemiBold(),
+                        ),
+                      ),
+                      SizedBox(
+                        height: screenHeight(context) * 0.005,
+                      ),
+                      DropdownButtonFormField(
+                          isExpanded: true,
+                          iconDisabledColor: Colors.black,
+                          iconEnabledColor: primaryColor,
+                          validator: (value) => value==null?"Please select":null,
+                          hint: Text('Select Type of job'),
+                          value: jobOfType,
+                          items: typeOfJob.map((e) {
+                            return DropdownMenuItem(value: e, child: new Text(
+                                e));
+                          }).toList(),
+                          onChanged: (newValue) {
+                            setState(() {
+                              jobOfType = newValue;
+                            });
+                          }),
+                      SizedBox(
+                        height: screenHeight(context) * 0.035,
+                      ),
+                      //**************Select No of People*************** */
+                      Container(
+                        child: Text('Select No of People',
+                            style: regularPrimaryColorSemiBold()),
+                      ),
+                      SizedBox(
+                        height: screenHeight(context) * 0.005,
+                      ),
+                      DropdownButtonFormField(
+                          isExpanded: true,
+                          iconDisabledColor: Colors.black,
+                          iconEnabledColor: primaryColor,
+                          validator: (value) => value==null?"Please select":null,
+                          hint: Text('Select No of People'),
+                          value: selectPeople,
+                          items: noOfPeople.map((e) {
+                            return DropdownMenuItem(value: e, child: new Text(e));
+                          }).toList(),
+                          onChanged: (newValue) {
+                            setState(() {
+                              selectPeople = newValue;
+                            });
+                          }),
+                      //******************Select Time************************* */
+                      SizedBox(
+                        height: screenHeight(context) * 0.035,
+                      ),
+                      Container(
+                        child: Text('Select Time',
+                            style: regularPrimaryColorSemiBold()),
+                      ),
+                      SizedBox(
+                        height: screenHeight(context) * 0.005,
+                      ),
+                      DropdownButtonFormField(
+                          isExpanded: true,
+                          iconDisabledColor: Colors.black,
+                          iconEnabledColor: primaryColor,
+                          hint: Text('Select Time'),
+                          validator: (value) => value==null?"Please select":null,
+                          value: selectTime,
+                          items: time.map((e) {
+                            return DropdownMenuItem(value: e, child: new Text(e));
+                          }).toList(),
+                          onChanged: (newValue) {
+                            setState(() {
+                              selectTime = newValue;
+                            });
+                          }),
+//******************Select Country State city************************* */
+                      /** see In Widget packege view */
+                      SizedBox(
+                        height: screenHeight(context) * 0.035,
+                      ),
+                      CustomSelectState(
+                        onCountryChanged: (value) {
+                          setState(() {
+                            countryValue = value;
+                          });
+                        },
+                        onStateChanged: (value) {
+                          setState(() {
+                            stateValue = value;
+                          });
+                        },
+                        onCityChanged: (value) {
+                          setState(() {
+                            cityValue = value;
+                          });
+                        },
+                      ),
+//                      CountryStateCityView(selectedCountry: countryValue,selectedState: stateValue,selectedCity: cityValue,),
+//                      // Container(
+//                      //   child:
+//                      //       Text('Country', style: regularPrimaryColorSemiBold()),
+//                      // ),
+//                      // SizedBox(
+//                      //   height: screenHeight(context) * 0.01,
+//                      // ),
+//                      // DropdownButton(
+//                      //     isExpanded: true,
+//                      //     iconDisabledColor: Colors.black,
+//                      //     iconEnabledColor: primaryColor,
+//                      //     hint: Text('Select Country'),
+//                      //     value: selectCountry,
+//                      //     items: country.map((e) {
+//                      //       return DropdownMenuItem(value: e, child: new Text(e));
+//                      //     }).toList(),
+//                      //     onChanged: (newValue) {
+//                      //       setState(() {
+//                      //         selectCountry = newValue;
+//                      //       });
+//                      //     }),
+                      SizedBox(
+                        height: screenHeight(context) * 0.035,
+                      ),
 
-                  SizedBox(
-                    height: screenHeight(context) * 0.03,
-                  ),
-                  //************************Job Discription********************** */
-                  TextFormField(
-                    controller: _discriptionController,
-                    focusNode: jobDiscription,
-                    autofocus: false,
-                    autocorrect: true,
-                    decoration: InputDecoration(labelText: 'Job Discription'),
-                    textInputAction: TextInputAction.next,
-                  ),
-                  SizedBox(
-                    height: screenHeight(context) * 0.03,
-                  ),
-                  FlatButton(
-                      color: primaryColor,
-                      onPressed: () {
-                        if (_formJobDetails.currentState.validate()) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Preview(
-                                        fristName: widget.fristName,
-                                        lastName: widget.lastName,
-                                        mobileNo: widget.mobileNo,
-                                        email: widget.email,
-                                        address: widget.address,
-                                        jobType: _typeOFJobController.text,
-                                        discription:
-                                            _discriptionController.text,
-                                        noOfPeople: selectPeople,
-                                        time: selectTime,
-                                      )));
-                        }
-                      },
-                      child: Text(
-                        'Submit'.toUpperCase(),
-                        style: largewhiteColorBold(),
-                      ))
-                ],
-              )),
-        )));
+                      //************************Job Address***************************/
+                      TextFormField(
+                        controller: _jobAddressController,
+                        focusNode: jobAddress,
+                        autofocus: false,
+                        autocorrect: true,
+                        validator: validateAddress,
+                        decoration: InputDecoration(
+                            labelText: 'Job Address',
+                            labelStyle: regularPrimaryColorSemiBold()),
+                        textInputAction: TextInputAction.next,
+                      ),
+                      SizedBox(
+                        height: screenHeight(context) * 0.035,
+                      ),
+
+                      //************************Job Discription********************** */
+                      TextFormField(
+                        controller: _jobdiscriptionController,
+                        focusNode: jobDiscription,
+                        autofocus: false,
+                        autocorrect: true,
+                        decoration: InputDecoration(
+                            labelText: 'Job Discription',
+                            labelStyle: regularPrimaryColorSemiBold()),
+                        textInputAction: TextInputAction.next,
+                      ),
+                      SizedBox(
+                        height: screenHeight(context) * 0.035,
+                      ),
+                      //************************PinCode********************** */
+                      TextFormField(
+                        controller: _pinCodeController,
+                        focusNode: pinCodeNode,
+                        autofocus: false,
+                        autocorrect: true,
+                        keyboardType: TextInputType.phone,
+                        validator: validatePinCode,
+                        decoration: InputDecoration(
+                            labelText: 'Pincode',
+                            labelStyle: regularPrimaryColorSemiBold()),
+                        textInputAction: TextInputAction.next,
+                      ),
+                      SizedBox(
+                        height: screenHeight(context) * 0.035,
+                      ),
+                      Center(child:
+                      FlatButton(
+                          color: primaryColor,
+                          onPressed: () {
+                            if (_formJobDetails.currentState.validate() && formCountry.currentState.validate()) {
+                              Fluttertoast.showToast(
+                                  backgroundColor: primaryColor,
+                                  textColor: Colors.white,
+                                  gravity: ToastGravity.BOTTOM,
+                                  toastLength: Toast.LENGTH_LONG,
+                                  msg: 'Post Added sucessfully');
+//                          Navigator.push(
+//                              context,
+//                              MaterialPageRoute(
+//                                  builder: (context) => Preview(
+//                                        fristName: widget.fristName,
+//                                        lastName: widget.lastName,
+//                                        mobileNo: widget.mobileNo,
+//                                        email: widget.email,
+//                                        address: widget.address,
+//                                        jobType: _typeOFJobController.text,
+//                                        discription:
+//                                            _jobdiscriptionController.text,
+//                                        noOfPeople: selectPeople,
+//                                        time: selectTime,
+//                                      )));
+                            }
+                          },
+                          child: Text(
+                            'Submit'.toUpperCase(),
+                            style: largewhiteColorBold(),
+                          )),),
+                      Center(child:
+                      FlatButton(
+                          color: primaryColor,
+                          onPressed: () => clearTextFormField(),
+                          child: Text('Clear'.toUpperCase(),
+                            style: largewhiteColorBold(),))),
+                    ],
+                  )),
+            )));
+  }
+
+  clearTextFormField() {
+    setState(() {
+      _jobdiscriptionController.clear();
+      _jobAddressController.clear();
+      _pinCodeController.clear();
+      selectPeople = null;
+      selectTime = null;
+      jobOfType = null;
+      CustomSelectState().createState().selectedCity=null;
+      CustomSelectState().createState().selectedState=null;
+      CustomSelectState().createState().selectedCountry=null;
+    });
   }
 }
