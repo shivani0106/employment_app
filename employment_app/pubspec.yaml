@@ -24,6 +24,8 @@ dependencies:
   flutter_facebook_auth: "^1.0.0"
   http: ^0.12.2
   fluttertoast: ^7.1.6
+  country_state_city_picker: ^1.2.7
+
 
 dev_dependencies:
   flutter_test:
@@ -36,7 +38,7 @@ flutter:
     - lib/assets/images/appLogo.jpg
     - lib/assets/images/google.png
     - lib/assets/images/facebookLogo.png
-
+    - lib/assets/json/country.json
 
   #   - images/a_dot_ham.jpeg
 

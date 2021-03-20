@@ -81,6 +81,14 @@ TextStyle smallPrimaryColorSemiBold() {
       color: primaryColor);
 }
 
+TextStyle regularPrimaryColorSemiBold() {
+  return TextStyle(
+      fontFamily: 'SourceSansPro-SemiBold',
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      color: primaryColor);
+}
+
 TextStyle smallPrimaryColorRegular() {
   return TextStyle(
       fontFamily: 'SourceSansPro-Regular',

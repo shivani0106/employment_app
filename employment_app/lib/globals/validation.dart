@@ -42,7 +42,7 @@ String validateEmail(String value) {
 }
 
 ///Address Validation********************************************************************************
-String validatreAddress(String value) {
+String validateAddress(String value) {
   if (value.isEmpty)
     return "Enter Address";
   else
@@ -54,6 +54,24 @@ String validateJob(String value) {
     return "Enter JOb Type";
   else
     return null;
+}
+
+String validatePinCode(String value){
+  if(value.isEmpty)
+    return "Enter PinCode";
+  else if(value.length!=6)
+    return "Enter 6 digit PinCode";
+  else
+    return null;
+}
+
+String validateDropDown(String value){
+  if(value.isEmpty){
+    return "Please select";
+  }
+  else {
+    return null;
+  }
 }
 
 FirebaseAuth _auth = FirebaseAuth.instance;
