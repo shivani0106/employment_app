@@ -25,6 +25,7 @@ dependencies:
   http: ^0.12.2
   fluttertoast: ^7.1.6
   country_state_city_picker: ^1.2.7
+  image_picker: ^0.6.7+22
 
 
 dev_dependencies:
@@ -39,7 +40,7 @@ flutter:
     - lib/assets/images/google.png
     - lib/assets/images/facebookLogo.png
     - lib/assets/json/country.json
-
+    - lib/assets/images/user_avatar.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

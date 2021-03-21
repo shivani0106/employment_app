@@ -66,12 +66,10 @@ String validatePinCode(String value){
 }
 
 String validateDropDown(String value){
-  if(value.isEmpty){
+  if(value.isEmpty)
     return "Please select";
-  }
-  else {
+  else
     return null;
-  }
 }
 
 FirebaseAuth _auth = FirebaseAuth.instance;

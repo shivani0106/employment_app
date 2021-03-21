@@ -1,7 +1,7 @@
 import 'package:employment_app/globals/Globals.dart';
 import 'package:employment_app/globals/validation.dart';
 import 'package:employment_app/my_packages/custom_country_state_city.dart';
-import 'package:employment_app/screen/addJob/Preview.dart';
+import 'file:///F:/Final%20year%20project/employment_app/employment_app/lib/screen/profile/profile_view.dart';
 import 'package:employment_app/style/Style.dart';
 import 'package:employment_app/widgets/country_state_city.dart';
 import 'package:flutter/material.dart';
@@ -35,24 +35,10 @@ class _AddJobDetailsState extends State<AddJobDetails> {
   String selectPeople;
 
   //*************************Time ******************** */
-  List<String> time = [
-    'Less than 8 hour',
-    '8 hour',
-    "More than 8 hour",
-  ];
+
   String selectTime;
 
   //*************************job type ******************** */
-
-
-  List<String> typeOfJob = [
-    'Painter',
-    'abcd',
-    'efpydgdf',
-    'sdsahjkasd',
-    'hsfjdjfksd',
-    'fjdfhds'
-  ];
 
   String jobOfType;
 
@@ -101,8 +87,7 @@ class _AddJobDetailsState extends State<AddJobDetails> {
                           hint: Text('Select Type of job'),
                           value: jobOfType,
                           items: typeOfJob.map((e) {
-                            return DropdownMenuItem(value: e, child: new Text(
-                                e));
+                            return DropdownMenuItem(value: e, child: new Text(e));
                           }).toList(),
                           onChanged: (newValue) {
                             setState(() {

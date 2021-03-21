@@ -1,6 +1,7 @@
 import 'package:employment_app/globals/Globals.dart';
 import 'package:employment_app/globals/validation.dart';
 import 'package:employment_app/screen/addJob/AddJobDetails.dart';
+import 'package:employment_app/screen/profile/profile_view.dart';
 import 'package:employment_app/style/Style.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,7 @@ class _AddPersonalDetailsState extends State<AddPersonalDetails> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: primaryColor,
-          title: Text('Create Job'),
+          title: Text('Add Profile'),
         ),
         body: Container(
             padding: EdgeInsets.fromLTRB(
@@ -120,16 +121,16 @@ class _AddPersonalDetailsState extends State<AddPersonalDetails> {
                         color: primaryColor,
                         onPressed: () {
                           if (_formKeyDetails.currentState.validate()) {
-//                            Navigator.push(
-//                                context,
-//                                MaterialPageRoute(
-//                                    builder: (context) => AddJobDetails(
-//                                          fristName: _fristnameController.text,
-//                                          lastName: _lastnameController.text,
-//                                          mobileNo: _mobilenoController.text,
-//                                          email: _emailController.text,
-//                                          address: _addressController.text,
-//                                        )));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProfileView(
+                                          fristName: _fristnameController.text,
+                                          lastName: _lastnameController.text,
+                                          mobileNo: _mobilenoController.text,
+                                          email: _emailController.text,
+                                          address: _addressController.text,
+                                        )));
                           }
                         },
                         child: Text(
