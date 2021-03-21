@@ -29,6 +29,7 @@ class _SignInState extends State<SignIn> {
 
   FirebaseAuth _auth = FirebaseAuth.instance;
   UserCredential result;
+
   Future<bool> loginUser(String phone, BuildContext context) async {
     _auth.verifyPhoneNumber(
       phoneNumber: phone,
@@ -106,6 +107,10 @@ class _SignInState extends State<SignIn> {
     );
   }
 
+  Stream<User> get user {
+    return _auth.authStateChanges();
+  }
+
   //Google
   Future<UserCredential> signInWithGoogle() async {
     // Trigger the authentication flow
@@ -161,8 +166,9 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: backprimaryColor,
-        body: Stack(children: [
+      backgroundColor: backprimaryColor,
+      body: Stack(
+        children: [
           SingleChildScrollView(
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -193,149 +199,151 @@ class _SignInState extends State<SignIn> {
                 ]),
           ),
           Container(
-              alignment: Alignment.center,
-              child: ModalProgressHUD(
-                  inAsyncCall: showSpinner,
-                  child: SingleChildScrollView(
-                    child: Container(
-                        height: screenHeight(context) * 0.45,
-                        margin: EdgeInsets.only(
-                            left: screenWidth(context) * 0.1,
-                            right: screenWidth(context) * 0.1,
-                            top: screenHeight(context) * 0.1,
-                            bottom: screenHeight(context) * 0.1),
-                        padding: EdgeInsets.only(
-                            left: screenWidth(context) * 0.01,
-                            right: screenWidth(context) * 0.01,
-                            top: screenHeight(context) * 0.01,
-                            bottom: screenHeight(context) * 0.01),
-                        child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Form(
-                              key: _formKey,
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  ///Mobile no ****************************************************************************
-                                  Container(
-                                    width: screenWidth(context) * 0.7,
-                                    margin: EdgeInsets.only(
-                                        left: screenWidth(context) * 0.02,
-                                        right: screenWidth(context) * 0.02),
-                                    child: TextFormField(
-                                      validator: validateMobile,
-                                      autofocus: false,
-                                      controller: _phoneController,
-                                      focusNode: _focusNodeOne,
-                                      keyboardType: TextInputType.phone,
-                                      decoration: InputDecoration(
-                                        prefix: Text("$countryCode "),
-                                        labelText: 'Mobile No.',
-                                        labelStyle: _focusNodeOne.hasFocus
-                                            ? regularBlueColor()
-                                            : regulargreyColor(),
-                                        //  errorText: validateMobile.toString()
-                                      ),
-                                    ),
-                                  ),
-
-                                  /// Sign In button *************************************************************************
-                                  FlatButton(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(18.0)),
-                                    color: primaryColor,
-                                    textColor: whiteColor,
-                                    onPressed: () {
-                                      if (_formKey.currentState.validate()) {
-                                        setState(() {
-                                          showSpinner = true;
-                                        });
-                                        final phoneNumber = countryCode +
-                                            _phoneController.text.trim();
-                                        print(phoneNumber);
-                                        loginUser(phoneNumber, context);
-                                        setState(() {
-                                          showSpinner = false;
-                                        });
-                                      }
-                                    },
-                                    child: Text(
-                                      'Sign In',
-                                      style: regularwhiteColorBold(),
-                                    ),
-                                  ),
-
-                                  Container(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        'OR',
-                                        style: regularprimaryColorBold(),
-                                      )),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: signInWithGoogle,
-                                        child: Container(
-                                          height: 50,
-                                          width: 100,
-                                          child: Image.asset(
-                                              'lib/assets/images/google.png',
-                                              fit: BoxFit.contain),
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          signInWithFacebook();
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  HomeScreen(),
-                                            ),
-                                          );
-                                        },
-                                        child: Container(
-                                          height: 45,
-                                          width: 80,
-                                          child: Image.asset(
-                                              'lib/assets/images/facebookLogo.png',
-                                              fit: BoxFit.contain),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  // GestureDetector(
-                                  //     onTap: () {
-                                  //       print(_auth.currentUser);
-
-                                  //       signOutUser();
-                                  //       print('Sign out');
-                                  //       print(_auth.currentUser);
-                                  //     },
-                                  //     child: Container(
-                                  //         alignment: Alignment.center,
-                                  //         child: RichText(
-                                  //           text: TextSpan(
-                                  //               text: 'Don\'t have an account?',
-                                  //               style: smallBlackColorRegular(),
-                                  //               children: [
-                                  //                 TextSpan(
-                                  //                     text: 'Sign Out',
-                                  //                     style:
-                                  //                         smallPrimaryColorSemiBold())
-                                  //               ]),
-                                  //         )))
-                                ],
+            alignment: Alignment.center,
+            child: ModalProgressHUD(
+              inAsyncCall: showSpinner,
+              child: SingleChildScrollView(
+                child: Container(
+                  height: screenHeight(context) * 0.45,
+                  margin: EdgeInsets.only(
+                      left: screenWidth(context) * 0.1,
+                      right: screenWidth(context) * 0.1,
+                      top: screenHeight(context) * 0.1,
+                      bottom: screenHeight(context) * 0.1),
+                  padding: EdgeInsets.only(
+                      left: screenWidth(context) * 0.01,
+                      right: screenWidth(context) * 0.01,
+                      top: screenHeight(context) * 0.01,
+                      bottom: screenHeight(context) * 0.01),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ///Mobile no ****************************************************************************
+                          Container(
+                            width: screenWidth(context) * 0.7,
+                            margin: EdgeInsets.only(
+                                left: screenWidth(context) * 0.02,
+                                right: screenWidth(context) * 0.02),
+                            child: TextFormField(
+                              validator: validateMobile,
+                              autofocus: false,
+                              controller: _phoneController,
+                              focusNode: _focusNodeOne,
+                              keyboardType: TextInputType.phone,
+                              decoration: InputDecoration(
+                                prefix: Text("$countryCode "),
+                                labelText: 'Mobile No.',
+                                labelStyle: _focusNodeOne.hasFocus
+                                    ? regularBlueColor()
+                                    : regulargreyColor(),
+                                //  errorText: validateMobile.toString()
                               ),
-                            ))),
-                  )))
-        ]));
+                            ),
+                          ),
+
+                          /// Sign In button *************************************************************************
+                          FlatButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0)),
+                            color: primaryColor,
+                            textColor: whiteColor,
+                            onPressed: () {
+                              if (_formKey.currentState.validate()) {
+                                setState(() {
+                                  showSpinner = true;
+                                });
+                                final phoneNumber =
+                                    countryCode + _phoneController.text.trim();
+                                print(phoneNumber);
+                                loginUser(phoneNumber, context);
+                                setState(() {
+                                  showSpinner = false;
+                                });
+                              }
+                            },
+                            child: Text(
+                              'Sign In',
+                              style: regularwhiteColorBold(),
+                            ),
+                          ),
+
+                          Container(
+                              alignment: Alignment.center,
+                              child: Text(
+                                'OR',
+                                style: regularprimaryColorBold(),
+                              )),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              GestureDetector(
+                                onTap: signInWithGoogle,
+                                child: Container(
+                                  height: 50,
+                                  width: 100,
+                                  child: Image.asset(
+                                      'lib/assets/images/google.png',
+                                      fit: BoxFit.contain),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  signInWithFacebook();
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => HomeScreen(),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  height: 45,
+                                  width: 80,
+                                  child: Image.asset(
+                                      'lib/assets/images/facebookLogo.png',
+                                      fit: BoxFit.contain),
+                                ),
+                              ),
+                            ],
+                          ),
+                          // GestureDetector(
+                          //     onTap: () {
+                          //       print(_auth.currentUser);
+
+                          //       signOutUser();
+                          //       print('Sign out');
+                          //       print(_auth.currentUser);
+                          //     },
+                          //     child: Container(
+                          //         alignment: Alignment.center,
+                          //         child: RichText(
+                          //           text: TextSpan(
+                          //               text: 'Don\'t have an account?',
+                          //               style: smallBlackColorRegular(),
+                          //               children: [
+                          //                 TextSpan(
+                          //                     text: 'Sign Out',
+                          //                     style:
+                          //                         smallPrimaryColorSemiBold())
+                          //               ]),
+                          //         )))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
