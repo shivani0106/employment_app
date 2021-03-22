@@ -1,5 +1,6 @@
 import 'package:employment_app/home_screen.dart';
 import 'package:employment_app/introduction/Introduction.dart';
+import 'package:employment_app/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:employment_app/style/Style.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,17 +22,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Employment_app',
+      home: Wrapper(),
       theme: ThemeData(
         scaffoldBackgroundColor: secondryBackColor,
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       //home: Introduction(),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => SignIn(),
-        // '/signUp': (context) => SignUp()
-      },
+      // initialRoute: '/',
+      // routes: {
+      //   '/': (context) => SignIn(),
+      //   // '/signUp': (context) => SignUp()
+      // },
     );
   }
 }

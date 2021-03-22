@@ -56,26 +56,18 @@ String validateJob(String value) {
     return null;
 }
 
-String validatePinCode(String value){
-  if(value.isEmpty)
+String validatePinCode(String value) {
+  if (value.isEmpty)
     return "Enter PinCode";
-  else if(value.length!=6)
+  else if (value.length != 6)
     return "Enter 6 digit PinCode";
   else
     return null;
 }
 
-String validateDropDown(String value){
-  if(value.isEmpty)
+String validateDropDown(String value) {
+  if (value.isEmpty)
     return "Please select";
   else
     return null;
-}
-
-FirebaseAuth _auth = FirebaseAuth.instance;
-
-void signOut() {
-  _auth.signOut();
-  print(_auth.currentUser);
-  print('you are sucessfull signOut');
 }

@@ -1,4 +1,5 @@
 import 'package:employment_app/auth/SignIn.dart';
+import 'package:employment_app/auth/authenticate.dart';
 import 'package:employment_app/globals/validation.dart';
 import 'package:employment_app/screen/addJob/AddJobDetails.dart';
 import 'package:employment_app/screen/findJob/find_job_view.dart';
@@ -10,6 +11,7 @@ import 'createDrawerHeader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 FirebaseAuth _auth = FirebaseAuth.instance;
+Authenticate authenticate = Authenticate();
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key key}) : super(key: key);
@@ -34,8 +36,8 @@ class NavigationDrawer extends StatelessWidget {
         craeteDrawerBodyItems(
             icons: Icons.people,
             text: 'Profile',
-            onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) => AddPersonalDetails()))),
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AddPersonalDetails()))),
         craeteDrawerBodyItems(
             icons: Icons.login,
             text: 'Sign In',
@@ -46,8 +48,8 @@ class NavigationDrawer extends StatelessWidget {
             text: 'Sign Out',
             onTap: () {
               if (_auth.currentUser != null) {
-                signOut();
-                Navigator.pop(context);
+                authenticate.signOutUser(context);
+                //Navigator.pop(context);
               } else {
                 Fluttertoast.showToast(
                     msg: 'You are already logout please login',
