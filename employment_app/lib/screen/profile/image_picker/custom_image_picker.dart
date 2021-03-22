@@ -30,7 +30,7 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
                     case ConnectionState.none:
                     case ConnectionState.waiting:
                       return const CircleAvatar(
-                        radius: 70,
+                        radius: 85,
                         backgroundColor: Colors.white,
                         backgroundImage:
                             AssetImage('lib/assets/images/user_avatar.png'),
@@ -46,7 +46,7 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
                         );
                       } else {
                         return CircleAvatar(
-                          radius: 70,
+                          radius: 85,
                           backgroundColor: primaryColor,
                           backgroundImage:
                               AssetImage('lib/assets/images/user_avatar.png'),
@@ -57,7 +57,7 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
             : _previewImage(),
       ),
       Positioned(
-        right: 75,
+        right: 85,
           child: Container(
         margin: EdgeInsets.only(top: screenHeight(context) * 0.1),
         alignment: Alignment.bottomRight,
@@ -142,7 +142,7 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
       );
     } else {
       return const CircleAvatar(
-        radius: 70,
+        radius: 85,
         backgroundColor: Colors.white,
         backgroundImage: AssetImage(
           'lib/assets/images/user_avatar.png',

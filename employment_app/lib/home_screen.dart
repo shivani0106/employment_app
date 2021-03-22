@@ -1,3 +1,4 @@
+import 'package:employment_app/screen/job_details/job_details_view.dart';
 import 'package:employment_app/style/Style.dart';
 import 'package:employment_app/widgets/NavigationDrawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -39,7 +40,10 @@ class _HomeScreenState extends State<HomeScreen> {
         body: ListView.builder(
             itemCount: 10,
             itemBuilder: (BuildContext context, int i) {
-              return Container(
+              return InkWell(
+                    onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>JobDetailsView())),
+                  child:
+                  Container(
                   padding: EdgeInsets.fromLTRB(screenWidth(context) * 0.02, 0,
                       screenWidth(context) * 0.02, 0),
                   height: 150,
@@ -85,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ))
                       ],
                     ),
-                  ));
+                  )));
             }));
   }
 }
