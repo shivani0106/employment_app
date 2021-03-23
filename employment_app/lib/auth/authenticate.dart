@@ -40,7 +40,7 @@ class Authenticate {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HomeScreen(user: user),
+              builder: (context) => HomeScreen(),
             ),
           );
         } else {
@@ -93,7 +93,7 @@ class Authenticate {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => HomeScreen(user: user),
+                          builder: (context) => HomeScreen(),
                         ),
                       );
                     } else {
@@ -151,9 +151,7 @@ class Authenticate {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => HomeScreen(
-          user: user,
-        ),
+        builder: (context) => HomeScreen(),
       ),
     );
   }

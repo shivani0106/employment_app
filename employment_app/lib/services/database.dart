@@ -17,6 +17,7 @@ class DatabaseService {
     int pincode,
   }) async {
     return await addJobDetails.doc(uid).set({
+      'UID': uid,
       'Job Type': jobType,
       'Number of People': numberOfPeople,
       'Time': time,

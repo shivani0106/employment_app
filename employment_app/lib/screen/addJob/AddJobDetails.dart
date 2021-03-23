@@ -1,6 +1,7 @@
 import 'package:employment_app/auth/authenticate.dart';
 import 'package:employment_app/globals/Globals.dart';
 import 'package:employment_app/globals/validation.dart';
+import 'package:employment_app/home_screen.dart';
 import 'package:employment_app/my_packages/custom_country_state_city.dart';
 import 'package:employment_app/services/database.dart';
 import 'package:employment_app/style/Style.dart';
@@ -9,8 +10,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 // UID fetch
-Authenticate authenticate = Authenticate();
-String uid = authenticate.userID();
+HomeScreen homeScreen = HomeScreen();
+String uid = homeScreen.inputData();
 // Spinner
 bool showSpinner = false;
 
