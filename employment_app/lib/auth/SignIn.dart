@@ -1,7 +1,6 @@
 import 'package:employment_app/auth/authenticate.dart';
 import 'package:employment_app/globals/Globals.dart';
 import 'package:employment_app/globals/validation.dart';
-import 'package:employment_app/services/loading.dart';
 import 'package:employment_app/style/Style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

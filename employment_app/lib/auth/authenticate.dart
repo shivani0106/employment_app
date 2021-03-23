@@ -10,6 +10,7 @@ FirebaseAuth _auth = FirebaseAuth.instance;
 UserCredential result;
 final _codeController = TextEditingController();
 User user;
+String uid;
 
 class Authenticate {
   Future<bool> loginUser(String phone, BuildContext context) async {
@@ -23,7 +24,7 @@ class Authenticate {
         User user = result.user;
 
         //Navigator PUSH to HomeScreen() in home_screen.dart
-        String uid = user.uid.toString();
+        uid = user.uid.toString();
         print("uid = $uid");
 
         Fluttertoast.showToast(
@@ -75,7 +76,7 @@ class Authenticate {
                         smsCode: code, verificationId: verficationId);
                     result = await _auth.signInWithCredential(credential);
                     User user = result.user;
-                    String uid = user.uid.toString();
+                    uid = user.uid.toString();
                     print("uid = $uid");
 
                     //Navigator PUSH to HomeScreen() in home_screen.dart
@@ -134,7 +135,7 @@ class Authenticate {
     );
     result = await _auth.signInWithCredential(credential);
     User user = result.user;
-    String uid = user.uid.toString();
+    uid = user.uid.toString();
     print("uid = $uid");
     Fluttertoast.showToast(
         msg: "Signed In",
@@ -175,5 +176,9 @@ class Authenticate {
         builder: (context) => SignIn(),
       ),
     );
+  }
+
+  String userID() {
+    return uid;
   }
 }
