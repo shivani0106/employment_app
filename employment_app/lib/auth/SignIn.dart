@@ -1,6 +1,7 @@
 import 'package:employment_app/auth/authenticate.dart';
 import 'package:employment_app/globals/Globals.dart';
 import 'package:employment_app/globals/validation.dart';
+import 'package:employment_app/services/loading.dart';
 import 'package:employment_app/style/Style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -129,17 +130,20 @@ class _SignInState extends State<SignIn> {
                             textColor: whiteColor,
                             onPressed: () {
                               if (_formKey.currentState.validate()) {
+                                final phoneNumber =
+                                    countryCode + _phoneController.text.trim();
+
+                                print(phoneNumber);
                                 setState(() {
                                   showSpinner = true;
                                 });
-                                final phoneNumber =
-                                    countryCode + _phoneController.text.trim();
-                                print(phoneNumber);
                                 authenticate.loginUser(phoneNumber, context);
-                                setState(() {
-                                  showSpinner = false;
-                                });
                               }
+                              // if (result == null) {
+                              //   setState(() {
+                              //     loading = false;
+                              //   });
+                              // }
                             },
                             child: Text(
                               'Sign In',
@@ -158,6 +162,9 @@ class _SignInState extends State<SignIn> {
                             children: [
                               GestureDetector(
                                 onTap: () {
+                                  setState(() {
+                                    showSpinner = true;
+                                  });
                                   authenticate.signInWithGoogle(context);
                                 },
                                 child: Container(
