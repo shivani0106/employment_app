@@ -10,6 +10,22 @@ import 'package:provider/provider.dart';
 String userId;
 
 class HomeScreen extends StatelessWidget {
+  final String selectTypeOfJob;
+  final String selectTime;
+  final String countryValue;
+  final String stateValue;
+  final String cityValue;
+  final int flag;
+
+  HomeScreen({
+    this.selectTime,
+    this.flag,
+    this.cityValue,
+    this.countryValue,
+    this.selectTypeOfJob,
+    this.stateValue,
+  });
+
   final FirebaseAuth auth = FirebaseAuth.instance;
   String inputData() {
     final User user = auth.currentUser;
@@ -20,6 +36,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('flag=$flag');
     print('Home uid:${inputData()}');
     return StreamProvider<QuerySnapshot>.value(
       value: DatabaseService().jobDetailsDisplay,
@@ -40,12 +57,24 @@ class HomeScreen extends StatelessWidget {
                 Icons.filter_list,
                 color: Colors.white,
               ),
-              onPressed: null,
+              onPressed: () {
+                print('Null is pressed');
+                JobsListView(
+                  flag: 0,
+                );
+              },
             ),
           ],
         ),
         drawer: NavigationDrawer(),
-        body: JobsListView(),
+        body: JobsListView(
+          cityValue: cityValue,
+          countryValue: countryValue,
+          stateValue: stateValue,
+          selectTime: selectTime,
+          selectTypeOfJob: selectTypeOfJob,
+          flag: flag,
+        ),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:employment_app/globals/Globals.dart';
 import 'package:flutter/material.dart';
 import 'package:employment_app/screen/job_details/job_details_view.dart';
 import 'package:employment_app/auth/authenticate.dart';
@@ -10,24 +11,69 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
 // List for fetching data from firebase
-
 var jobTitle = [];
 var jobDescription = [];
+int count = 0;
 
 class JobsListView extends StatelessWidget {
+  final String selectTypeOfJob;
+  final String selectTime;
+  final String countryValue;
+  final String stateValue;
+  final String cityValue;
+  final int flag;
+
+  JobsListView({
+    this.selectTime,
+    this.cityValue,
+    this.countryValue,
+    this.selectTypeOfJob,
+    this.stateValue,
+    this.flag,
+  });
+
   @override
   Widget build(BuildContext context) {
     final seeJobsFromFirebase = Provider.of<QuerySnapshot>(context);
     print("seeJobsFromFirebase.docs:");
-    for (var data in seeJobsFromFirebase.docs) {
-      jobTitle.add(data.data()['Job Type']);
-      jobDescription.add(data.data()['Job Description']);
+
+    void displayAll() {
+      for (var data in seeJobsFromFirebase.docs) {
+        jobTitle.add(data.data()['Job Type']);
+        jobDescription.add(data.data()['Job Description']);
+      }
     }
 
-    print(jobTitle);
+//***************************Filter below***********/
+    void displayFilter() {
+      for (var data in seeJobsFromFirebase.docs) {
+        if (selectTypeOfJob == data.data()['Job Type'] &&
+            selectTime == data.data()['Time'] &&
+            countryValue == data.data()['Country'] &&
+            stateValue == data.data()['State'] &&
+            cityValue == data.data()['City']) {
+          // adding jobs in list
+          count++;
+          jobTitle.add(data.data()['Job Type']);
+          jobDescription.add(data.data()['Job Description']);
+          // numberOfPeople.add(data.data()['Number of People']);
+          // hours.add(data.data()['Time']);
+          // address.add(data.data()['Job Address']);
+        }
+      }
+      if (jobTitle.isEmpty) {
+        print('No data Found');
+      }
+    }
 
+    if (flag == null || flag == 0) {
+      displayAll();
+    } else {
+      displayFilter();
+    }
     return ListView.builder(
-        itemCount: seeJobsFromFirebase.size,
+        itemCount:
+            (flag == null || flag == 0) ? seeJobsFromFirebase.size : count,
         itemBuilder: (BuildContext context, int i) {
           return InkWell(
             onTap: () => Navigator.push(
