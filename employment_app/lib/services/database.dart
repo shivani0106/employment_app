@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+/*import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
   final CollectionReference addJobDetails =
@@ -33,6 +33,7 @@ class DatabaseService {
       'Pincode': pincode
     });
   }
+<<<<<<< Updated upstream
 
 //********************Get add job detail from database****************/
 
@@ -64,3 +65,6 @@ class DatabaseService {
     });
   }
 }
+=======
+}*/
+>>>>>>> Stashed changes

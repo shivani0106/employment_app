@@ -15,7 +15,7 @@ String uid = homeScreen.inputData();
 // Spinner
 bool showSpinner = false;
 
-DatabaseService databaseService = DatabaseService();
+//DatabaseService databaseService = DatabaseService();
 
 class AddJobDetails extends StatefulWidget {
   AddJobDetails();
@@ -64,8 +64,8 @@ class _AddJobDetailsState extends State<AddJobDetails> {
           backgroundColor: primaryColor,
           title: Text('Create Job'),
         ),
-        body: SingleChildScrollView(
-            child: ModalProgressHUD(
+        body:
+            ModalProgressHUD(
           inAsyncCall: showSpinner,
           child: Container(
             padding: EdgeInsets.fromLTRB(
@@ -73,10 +73,12 @@ class _AddJobDetailsState extends State<AddJobDetails> {
                 screenHeight(context) * 0.03,
                 screenWidth(context) * 0.05,
                 screenHeight(context) * 0.03),
+            height: screenHeight(context),
             child: Form(
                 key: _formJobDetails,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: SingleChildScrollView(child:
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     //**************************Type of job************************ */
@@ -186,6 +188,8 @@ class _AddJobDetailsState extends State<AddJobDetails> {
                     ),
 
                     //************************Job Address***************************/
+                    Row(children: [
+                      Expanded(child:
                     TextFormField(
                       controller: _jobAddressController,
                       focusNode: jobAddress,
@@ -196,12 +200,15 @@ class _AddJobDetailsState extends State<AddJobDetails> {
                           labelText: 'Job Address',
                           labelStyle: regularPrimaryColorSemiBold()),
                       textInputAction: TextInputAction.next,
-                    ),
+                    ),),
+                    ]),
                     SizedBox(
                       height: screenHeight(context) * 0.035,
                     ),
 
                     //************************Job Discription********************** */
+                    Row(children:[
+                      Expanded(child:
                     TextFormField(
                       controller: _jobdiscriptionController,
                       focusNode: jobDiscription,
@@ -211,11 +218,13 @@ class _AddJobDetailsState extends State<AddJobDetails> {
                           labelText: 'Job Discription',
                           labelStyle: regularPrimaryColorSemiBold()),
                       textInputAction: TextInputAction.next,
-                    ),
+                    ),)]),
                     SizedBox(
                       height: screenHeight(context) * 0.035,
                     ),
                     //************************PinCode********************** */
+                    Row(children: [
+                      Expanded(child:
                     TextFormField(
                       controller: _pinCodeController,
                       focusNode: pinCodeNode,
@@ -227,12 +236,11 @@ class _AddJobDetailsState extends State<AddJobDetails> {
                           labelText: 'Pincode',
                           labelStyle: regularPrimaryColorSemiBold()),
                       textInputAction: TextInputAction.next,
-                    ),
+                    ),)]),
                     SizedBox(
                       height: screenHeight(context) * 0.035,
                     ),
-                    Center(
-                      child: FlatButton(
+                    FlatButton(
                           color: primaryColor,
                           onPressed: () async {
                             if (_formJobDetails.currentState.validate() &&
@@ -241,39 +249,39 @@ class _AddJobDetailsState extends State<AddJobDetails> {
                                 showSpinner = true;
                               });
                               // Firestore add data
-                              await databaseService.updateAddJobDetails(
-                                jobType: jobOfType,
-                                numberOfPeople: selectPeople,
-                                city: cityValue,
-                                country: countryValue,
-                                state: stateValue,
-                                jobAddress: _jobAddressController.text,
-                                jobDescription: _jobdiscriptionController.text,
-                                pincode: int.parse(_pinCodeController.text),
-                                time: selectTime,
-                                uid: uid,
-                              );
+//                              await databaseService.updateAddJobDetails(
+//                                jobType: jobOfType,
+//                                numberOfPeople: selectPeople,
+//                                city: cityValue,
+//                                country: countryValue,
+//                                state: stateValue,
+//                                jobAddress: _jobAddressController.text,
+//                                jobDescription: _jobdiscriptionController.text,
+//                                pincode: int.parse(_pinCodeController.text),
+//                                time: selectTime,
+//                                uid: uid,
+//                              );
                               Fluttertoast.showToast(
                                   backgroundColor: primaryColor,
                                   textColor: Colors.white,
                                   gravity: ToastGravity.BOTTOM,
                                   toastLength: Toast.LENGTH_LONG,
                                   msg: 'Post Added');
+
+                              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>HomeScreen()), (route) => false);
                             }
                           },
                           child: Text(
                             'Submit'.toUpperCase(),
                             style: largewhiteColorBold(),
                           )),
-                    ),
-                    Center(
-                        child: FlatButton(
+                    FlatButton(
                             color: primaryColor,
                             onPressed: () => clearTextFormField(),
                             child: Text(
                               'Clear'.toUpperCase(),
                               style: largewhiteColorBold(),
-                            ))),
+                            )),
                   ],
                 )),
           ),
