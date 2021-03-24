@@ -1,15 +1,33 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:employment_app/screen/job_details/job_provider_view.dart';
 import 'package:employment_app/style/Style.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class JobDetailsView extends StatefulWidget {
-  @override
-  _JobDetailsViewState createState() => _JobDetailsViewState();
-}
+// List for fetching data from firebase
+var jobTitle = [];
+var jobDescription = [];
+var numberOfPeople = [];
+var hours = [];
+var address = [];
 
-class _JobDetailsViewState extends State<JobDetailsView> {
+class JobDetailsView extends StatelessWidget {
+  final int count;
+  final seeJobsFromFirebase;
+  JobDetailsView({this.count, this.seeJobsFromFirebase});
+
   @override
   Widget build(BuildContext context) {
+    print("seeJobsFromFirebase.docs:");
+
+    for (var data in seeJobsFromFirebase.docs) {
+      jobTitle.add(data.data()['Job Type']);
+      jobDescription.add(data.data()['Job Description']);
+      numberOfPeople.add(data.data()['Number of People']);
+      hours.add(data.data()['Time']);
+      address.add(data.data()['Job Address']);
+    }
+    print(jobTitle);
     return Scaffold(
         appBar: AppBar(
           backgroundColor: primaryColor,
@@ -34,7 +52,7 @@ class _JobDetailsViewState extends State<JobDetailsView> {
                       style: largePrimaryColorsemiBold(),
                       children: [
                         TextSpan(
-                            text: 'sdsjdhkaj',
+                            text: jobTitle[count],
                             style: regularBlackColorRegular())
                       ]),
                 ),
@@ -44,7 +62,7 @@ class _JobDetailsViewState extends State<JobDetailsView> {
                       style: largePrimaryColorsemiBold(),
                       children: [
                         TextSpan(
-                            text: 'dshdkjshdjka00',
+                            text: numberOfPeople[count],
                             style: regularBlackColorRegular())
                       ]),
                 ),
@@ -54,17 +72,17 @@ class _JobDetailsViewState extends State<JobDetailsView> {
                       style: largePrimaryColorsemiBold(),
                       children: [
                         TextSpan(
-                            text: 'dshdkjshdjka00',
+                            text: hours[count],
                             style: regularBlackColorRegular())
                       ]),
                 ),
                 RichText(
                   text: TextSpan(
-                      text: 'Discription:',
+                      text: 'Description:',
                       style: largePrimaryColorsemiBold(),
                       children: [
                         TextSpan(
-                            text: 'dshdkjshdjka00',
+                            text: jobDescription[count],
                             style: regularBlackColorRegular())
                       ]),
                 ),
@@ -74,13 +92,13 @@ class _JobDetailsViewState extends State<JobDetailsView> {
                       style: largePrimaryColorsemiBold(),
                       children: [
                         TextSpan(
-                            text: 'dshdkjshdjka00',
+                            text: address[count],
                             style: regularBlackColorRegular())
                       ]),
                 ),
                 Center(
                     child: FlatButton(
-                      color: primaryColor,
+                        color: primaryColor,
                         onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(

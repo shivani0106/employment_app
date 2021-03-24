@@ -1,9 +1,11 @@
-import 'package:employment_app/auth/authenticate.dart';
-import 'package:employment_app/screen/job_details/job_details_view.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:employment_app/services/database.dart';
 import 'package:employment_app/style/Style.dart';
 import 'package:employment_app/widgets/NavigationDrawer.dart';
+import 'package:employment_app/widgets/home_list_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 String userId;
 
@@ -23,7 +25,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return StreamProvider<QuerySnapshot>.value(
+      value: DatabaseService().jobDetailsDisplay,
+      child: Scaffold(
         appBar: AppBar(
           backgroundColor: primaryColor,
           //  automaticallyImplyLeading: false,
@@ -45,61 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         drawer: NavigationDrawer(),
-        body: ListView.builder(
-            itemCount: 10,
-            itemBuilder: (BuildContext context, int i) {
-              return InkWell(
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => JobDetailsView())),
-                  child: Container(
-                      padding: EdgeInsets.fromLTRB(screenWidth(context) * 0.02,
-                          0, screenWidth(context) * 0.02, 0),
-                      height: 150,
-                      width: screenWidth(context),
-                      child: Card(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                                padding: EdgeInsets.only(
-                                    left: screenWidth(context) * 0.03),
-                                child: Text(
-                                  'Painter',
-                                  style: largePrimaryColorsemiBold(),
-                                )),
-                            Container(
-                              padding: EdgeInsets.fromLTRB(
-                                  screenWidth(context) * 0.02,
-                                  screenHeight(context) * 0.01,
-                                  screenWidth(context) * 0.02,
-                                  screenHeight(context) * 0.01),
-                              child: Text(
-                                ' Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,',
-                                textAlign: TextAlign.justify,
-                              ),
-                            ),
-                            GestureDetector(
-                                child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Icon(Icons.visibility, size: 20),
-                                SizedBox(width: screenWidth(context) * 0.02),
-                                Container(
-                                    // decoration: BoxDecoration(color: primaryColor),
-                                    padding: EdgeInsets.only(
-                                        right: screenWidth(context) * 0.03),
-                                    alignment: Alignment.bottomRight,
-                                    child: Text(
-                                      'View',
-                                      style: regularprimaryColorBold(),
-                                    ))
-                              ],
-                            ))
-                          ],
-                        ),
-                      )));
-            }));
+        body: JobsListView(),
+      ),
+    );
   }
 }

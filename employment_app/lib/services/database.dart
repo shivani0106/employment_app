@@ -4,6 +4,7 @@ class DatabaseService {
   final CollectionReference addJobDetails =
       FirebaseFirestore.instance.collection('JobDetails');
 
+//********************Update and create Database for Job details****************/
   Future updateAddJobDetails({
     String uid,
     String jobType,
@@ -28,5 +29,11 @@ class DatabaseService {
       'Job Description': jobDescription,
       'Pincode': pincode
     });
+  }
+
+//********************Get add job detail from de****************/
+
+  Stream<QuerySnapshot> get jobDetailsDisplay {
+    return addJobDetails.snapshots();
   }
 }
