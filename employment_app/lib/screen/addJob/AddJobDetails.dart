@@ -260,6 +260,15 @@ class _AddJobDetailsState extends State<AddJobDetails> {
                                   toastLength: Toast.LENGTH_LONG,
                                   msg: 'Post Added');
                             }
+                            Navigator.pushAndRemoveUntil(
+                                context, MaterialPageRoute(builder: (context) =>
+                                HomeScreen(
+                                  cityValue: cityValue,
+                                  countryValue: countryValue,
+                                  stateValue: stateValue,
+                                  selectTime: selectTime,
+                                  selectTypeOfJob: jobOfType,
+                                  flag: 0,)), (route) => false);
                           },
                           child: Text(
                             'Submit'.toUpperCase(),

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:employment_app/screen/profile/AddPersonalDetails.dart';
+import 'package:employment_app/screen/profile/posted_job_list_view/posted_job_list_view.dart';
 import 'package:employment_app/screen/profile/profile_view.dart';
 import 'package:employment_app/style/Style.dart';
 import 'package:flutter/material.dart';
@@ -123,16 +124,25 @@ class ProfileDisplay extends StatelessWidget {
                           text: '$address', style: regularBlackColorRegular())
                     ]),
               ),
-//                RichText(
-//                  text: TextSpan(
-//                      text: 'Job type: ',
-//                      style: largePrimaryColorsemiBold(),
-//                      children: [
-//                        TextSpan(
-//                            text: '${widget.jobType}',
-//                            style: regularBlackColorRegular())
-//                      ]),
-//                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                RichText(
+                  text: TextSpan(
+                      text: 'Job posted: ',
+                      style: largePrimaryColorsemiBold(),
+                      children: [
+                        TextSpan(
+                            text: '0',
+                            style: regularBlackColorRegular())
+                      ]),
+                ),
+                  GestureDetector(
+                    onTap:()=> Navigator.push(context, MaterialPageRoute(builder: (context)=>PostedJobListView())),
+                    child: Container(child: Text('See'.toUpperCase(),style: largeDiffrentColorsemiBold(),),
+                    ),
+                  )
+                ])
 //                RichText(
 //                  text: TextSpan(
 //                      text: 'Discription: ',

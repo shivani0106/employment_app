@@ -134,7 +134,7 @@ class AddPersonalDetails extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HomeScreen(),
+                        builder: (context) => ProfileView(),
                       ),
                     );
                     Fluttertoast.showToast(

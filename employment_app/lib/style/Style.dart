@@ -121,6 +121,15 @@ TextStyle largePrimaryColorsemiBold() {
       color: primaryColor);
 }
 
+TextStyle largeDiffrentColorsemiBold() {
+  return TextStyle(
+      fontFamily: 'SourceSansPro-SemiBold',
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      color: Colors.teal);
+}
+
+
 TextStyle extralargeWhiteSemiBold() {
   return TextStyle(
       fontFamily: 'SourceSansPro-Bold',
