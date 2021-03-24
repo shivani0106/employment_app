@@ -4,6 +4,9 @@ class DatabaseService {
   final CollectionReference addJobDetails =
       FirebaseFirestore.instance.collection('JobDetails');
 
+  final CollectionReference addUserDetails =
+      FirebaseFirestore.instance.collection('UserDetails');
+
 //********************Update and create Database for Job details****************/
   Future updateAddJobDetails({
     String uid,
@@ -31,9 +34,33 @@ class DatabaseService {
     });
   }
 
-//********************Get add job detail from de****************/
+//********************Get add job detail from database****************/
 
   Stream<QuerySnapshot> get jobDetailsDisplay {
     return addJobDetails.snapshots();
+  }
+
+//********************Get add user profile from database****************/
+  Stream<QuerySnapshot> get userDetailsDisplay {
+    return addUserDetails.snapshots();
+  }
+
+//************************ Storing user profile in Database***********/
+  Future updateAddUserDetails({
+    String uid,
+    String firstName,
+    String lastName,
+    String email,
+    String phoneNumber,
+    String address,
+  }) async {
+    return await addUserDetails.doc().set({
+      'UID': uid,
+      'First Name': firstName,
+      'Last Name': lastName,
+      'Email': email,
+      'Address': address,
+      'Phone Number': phoneNumber
+    });
   }
 }

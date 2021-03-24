@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 
 String userId;
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   final FirebaseAuth auth = FirebaseAuth.instance;
   String inputData() {
     final User user = auth.currentUser;
@@ -19,12 +19,8 @@ class HomeScreen extends StatefulWidget {
   }
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
   Widget build(BuildContext context) {
+    print('Home uid:${inputData()}');
     return StreamProvider<QuerySnapshot>.value(
       value: DatabaseService().jobDetailsDisplay,
       child: Scaffold(

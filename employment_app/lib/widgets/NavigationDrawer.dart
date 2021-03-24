@@ -1,12 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:employment_app/auth/SignIn.dart';
 import 'package:employment_app/auth/authenticate.dart';
-import 'package:employment_app/globals/validation.dart';
 import 'package:employment_app/screen/addJob/AddJobDetails.dart';
 import 'package:employment_app/screen/findJob/find_job_view.dart';
-import 'package:employment_app/screen/profile/AddPersonalDetails.dart';
+import 'package:employment_app/screen/profile/profile_view.dart';
+import 'package:employment_app/services/database.dart';
 import 'package:employment_app/widgets/createDrawerBodyItems.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'createDrawerHeader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -14,8 +16,6 @@ FirebaseAuth _auth = FirebaseAuth.instance;
 Authenticate authenticate = Authenticate();
 
 class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -37,7 +37,7 @@ class NavigationDrawer extends StatelessWidget {
             icons: Icons.people,
             text: 'Profile',
             onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AddPersonalDetails()))),
+                MaterialPageRoute(builder: (context) => ProfileView()))),
         craeteDrawerBodyItems(
             icons: Icons.login,
             text: 'Sign In',
