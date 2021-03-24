@@ -1,17 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 ///mobile number validation***********************************************************************
-String validateMobileSignIn(String value) {
-  if (value.length == 0) return "Enter mobile number";
-  if (value.length != 10)
-    return "Mobile number must be 10 digit";
-  else
-    return null;
-}
-
 String validateMobile(String value) {
-  if(value.isEmpty)
-    return null;
+  if (value.length == 0) return "Enter mobile number";
   if (value.length != 10)
     return "Mobile number must be 10 digit";
   else
@@ -43,7 +34,7 @@ String validateEmail(String value) {
       r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
       r"{0,253}[a-zA-Z0-9])?)*$";
   RegExp regExp = new RegExp(pattern);
-  if (value.isEmpty) return null;
+  if (value.isEmpty) return 'Enter email Address';
   if (!regExp.hasMatch(value))
     return 'Enter valid email Address';
   else

@@ -105,7 +105,7 @@ class _SignInState extends State<SignIn> {
                                 left: screenWidth(context) * 0.02,
                                 right: screenWidth(context) * 0.02),
                             child: TextFormField(
-                              validator: validateMobileSignIn,
+                              validator: validateMobile,
                               autofocus: false,
                               controller: _phoneController,
                               focusNode: _focusNodeOne,
