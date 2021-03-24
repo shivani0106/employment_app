@@ -59,6 +59,7 @@ class HomeScreen extends StatelessWidget {
               ),
               onPressed: () {
                 print('Null is pressed');
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(
