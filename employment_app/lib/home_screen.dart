@@ -59,8 +59,13 @@ class HomeScreen extends StatelessWidget {
               ),
               onPressed: () {
                 print('Null is pressed');
-                JobsListView(
-                  flag: 0,
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => JobsListView(
+                      flag: 0,
+                    ),
+                  ),
                 );
               },
             ),
