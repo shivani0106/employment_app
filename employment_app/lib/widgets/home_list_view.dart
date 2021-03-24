@@ -23,6 +23,7 @@ class JobsListView extends StatelessWidget {
       jobTitle.add(data.data()['Job Type']);
       jobDescription.add(data.data()['Job Description']);
     }
+
     print(jobTitle);
 
     return ListView.builder(
