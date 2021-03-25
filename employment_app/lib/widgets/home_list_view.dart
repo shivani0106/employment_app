@@ -1,4 +1,5 @@
 import 'package:employment_app/globals/Globals.dart';
+import 'package:employment_app/screen/no_data/no_data_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:employment_app/screen/job_details/job_details_view.dart';
 import 'package:employment_app/auth/authenticate.dart';
@@ -71,6 +72,12 @@ class JobsListView extends StatelessWidget {
     } else {
       displayFilter();
     }
+
+    //****************************no Data Page******************************************
+   // return NoData();
+
+
+    //*****************************List view*********************************************
     return ListView.builder(
         itemCount:
             (flag == null || flag == 0) ? seeJobsFromFirebase.size : count,

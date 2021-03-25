@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:employment_app/screen/job_details/job_provider_view.dart';
 import 'package:employment_app/style/Style.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 // List for fetching data from firebase
@@ -96,17 +97,34 @@ class JobPostDetails extends StatelessWidget {
                             style: regularBlackColorRegular())
                       ]),
                 ),
-                Center(
-                    child: FlatButton(
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      FlatButton.icon(
                         color: primaryColor,
-                        onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => JobProviderView())),
-                        child: Text(
-                          'Click to see Provider Details'.toUpperCase(),
-                          style: largewhiteColorBold(),
-                        )))
+                          onPressed: () {},
+                          icon: Icon(Icons.update,color: Colors.white,),
+                          label: Text('Update'.toUpperCase(),
+                            style: largewhiteColorBold(),)),
+                      FlatButton.icon(
+                          icon: Icon(Icons.delete, color: Colors.white,),
+                          label: Text('Delete'.toUpperCase(),
+                            style: largewhiteColorBold(),),
+                        color: primaryColor,
+                          onPressed: () {
+                            Fluttertoast.showToast(
+                                backgroundColor: primaryColor,
+                                textColor: Colors.white,
+                                gravity: ToastGravity.BOTTOM,
+                                toastLength: Toast.LENGTH_LONG,
+                                msg: 'Deleted suceessfully');
+                            Navigator.pop(context);
+                          }),
+                    ]
+                )
+                //        )
+                //)
               ],
             ),
           ),

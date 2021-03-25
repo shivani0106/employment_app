@@ -25,6 +25,26 @@ class _FindJobViewState extends State<FindJobView> {
   String stateValue;
   String cityValue;
 
+  Future<bool> _willPopCallBack() async {
+    print("will pop work");
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomeScreen(
+          cityValue: cityValue,
+          countryValue: countryValue,
+          stateValue: stateValue,
+          selectTime: selectTime,
+          selectTypeOfJob: selectTypeOfJob,
+          flag: 0,
+        ),
+      ),
+          (route) => false,
+    );
+    return Future.value(true);
+
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,23 +53,7 @@ class _FindJobViewState extends State<FindJobView> {
           backgroundColor: primaryColor,
         ),
         body: WillPopScope(
-          // ignore: missing_return
-          onWillPop: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomeScreen(
-                  cityValue: cityValue,
-                  countryValue: countryValue,
-                  stateValue: stateValue,
-                  selectTime: selectTime,
-                  selectTypeOfJob: selectTypeOfJob,
-                  flag: 0,
-                ),
-              ),
-              (route) => false,
-            );
-          },
+          onWillPop:_willPopCallBack,
           child: SingleChildScrollView(
             child: Container(
               padding: EdgeInsets.fromLTRB(

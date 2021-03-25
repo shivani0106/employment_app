@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                   color: Colors.white,
                 ),
                 onPressed: null),
-            IconButton(
+            /*IconButton(
               icon: Icon(
                 Icons.filter_list,
                 color: Colors.white,
@@ -69,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 );
               },
-            ),
+            ),*/
           ],
         ),
         drawer: NavigationDrawer(),

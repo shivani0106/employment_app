@@ -130,20 +130,21 @@ class AddPersonalDetails extends StatelessWidget {
                         address: _addressController.text,
                         uid: uid,
                       );
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProfileView(),
+                        ),
+                      );
+                      Fluttertoast.showToast(
+                        backgroundColor: primaryColor,
+                        textColor: Colors.white,
+                        gravity: ToastGravity.BOTTOM,
+                        toastLength: Toast.LENGTH_LONG,
+                        msg: 'Profile Created',
+                      );
                     }
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProfileView(),
-                      ),
-                    );
-                    Fluttertoast.showToast(
-                      backgroundColor: primaryColor,
-                      textColor: Colors.white,
-                      gravity: ToastGravity.BOTTOM,
-                      toastLength: Toast.LENGTH_LONG,
-                      msg: 'Profile Created',
-                    );
                   },
                   child: Text(
                     'Next'.toUpperCase(),

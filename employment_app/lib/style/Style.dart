@@ -121,6 +121,15 @@ TextStyle largePrimaryColorsemiBold() {
       color: primaryColor);
 }
 
+TextStyle largeBlackColorsemiBold() {
+  return TextStyle(
+      fontFamily: 'SourceSansPro-SemiBold',
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      color: Colors.black);
+}
+
+
 TextStyle largeDiffrentColorsemiBold() {
   return TextStyle(
       fontFamily: 'SourceSansPro-SemiBold',

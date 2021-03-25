@@ -235,8 +235,7 @@ class _AddJobDetailsState extends State<AddJobDetails> {
                       child: FlatButton(
                           color: primaryColor,
                           onPressed: () async {
-                            if (_formJobDetails.currentState.validate() &&
-                                formCountry.currentState.validate()) {
+                            if (_formJobDetails.currentState.validate()) {
                               setState(() {
                                 showSpinner = true;
                               });
@@ -297,9 +296,9 @@ class _AddJobDetailsState extends State<AddJobDetails> {
       selectPeople = null;
       selectTime = null;
       jobOfType = null;
-      CustomSelectState().createState().selectedCity = null;
+      /*CustomSelectState().createState().selectedCity = null;
       CustomSelectState().createState().selectedState = null;
-      CustomSelectState().createState().selectedCountry = null;
+      CustomSelectState().createState().selectedCountry = null;*/
     });
   }
 }

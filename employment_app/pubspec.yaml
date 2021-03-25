@@ -41,6 +41,7 @@ flutter:
     - lib/assets/images/facebookLogo.png
     - lib/assets/json/country.json
     - lib/assets/images/user_avatar.png
+    - lib/assets/images/No-data.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

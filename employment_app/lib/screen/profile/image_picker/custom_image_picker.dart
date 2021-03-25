@@ -15,7 +15,10 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
   final ImagePicker _picker = ImagePicker();
   String _retrieveDataError;
 
+  //picked photo save in this variable
   PickedFile _imageFile;
+
+  //error
   dynamic _pickImageError;
 
   @override

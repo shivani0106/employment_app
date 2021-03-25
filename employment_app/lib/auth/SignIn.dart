@@ -40,6 +40,7 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backprimaryColor,
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -75,7 +76,6 @@ class _SignInState extends State<SignIn> {
             alignment: Alignment.center,
             child: ModalProgressHUD(
               inAsyncCall: showSpinner,
-              child: SingleChildScrollView(
                 child: Container(
                   height: screenHeight(context) * 0.45,
                   margin: EdgeInsets.only(
@@ -222,7 +222,7 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
             ),
-          )
+         // )
         ],
       ),
     );
