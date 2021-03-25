@@ -3,6 +3,7 @@ import 'package:employment_app/screen/profile/AddPersonalDetails.dart';
 import 'package:employment_app/screen/profile/posted_job_list_view/posted_job_list_view.dart';
 import 'package:employment_app/screen/profile/profile_view.dart';
 import 'package:employment_app/style/Style.dart';
+import 'package:employment_app/widgets/home_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +27,6 @@ class ProfileDisplay extends StatelessWidget {
     final seeUserFromFirebase = Provider.of<QuerySnapshot>(context);
     print("seeUsersFromFirebase.docs:");
     print(seeUserFromFirebase.docs.length);
-    print('uid = $uid');
 
     for (var data in seeUserFromFirebase.docs) {
       if (uid == data.data()['UID']) {
@@ -51,7 +51,7 @@ class ProfileDisplay extends StatelessWidget {
       );
     }
 
-    print('User Id: $userId');
+    print('User Id: $uid');
 
     print('Firstname=$firstname');
     return WillPopScope(
@@ -124,25 +124,20 @@ class ProfileDisplay extends StatelessWidget {
                           text: '$address', style: regularBlackColorRegular())
                     ]),
               ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                RichText(
-                  text: TextSpan(
-                      text: 'Job posted: ',
-                      style: largePrimaryColorsemiBold(),
-                      children: [
-                        TextSpan(
-                            text: '0',
-                            style: regularBlackColorRegular())
-                      ]),
-                ),
-                  GestureDetector(
-                    onTap:()=> Navigator.push(context, MaterialPageRoute(builder: (context)=>PostedJobListView())),
-                    child: Container(child: Text('See'.toUpperCase(),style: largeDiffrentColorsemiBold(),),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PostedJobListView())),
+                  child: Container(
+                    child: Text(
+                      'Job Posted'.toUpperCase(),
+                      style: largeDiffrentColorsemiBold(),
                     ),
-                  )
-                ])
+                  ),
+                )
+              ])
 //                RichText(
 //                  text: TextSpan(
 //                      text: 'Discription: ',
