@@ -30,6 +30,7 @@ class HomeScreen extends StatelessWidget {
   String inputData() {
     final User user = auth.currentUser;
     userId = user.uid.toString();
+
     return userId;
     // here you write the codes to input the data into firestore
   }

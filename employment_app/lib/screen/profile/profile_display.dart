@@ -30,6 +30,7 @@ class ProfileDisplay extends StatelessWidget {
 
     for (var data in seeUserFromFirebase.docs) {
       if (uid == data.data()['UID']) {
+        print('DataUid: ${data.data()['UID']}');
         firstname = (data.data()['First Name']);
         lastname = (data.data()['Last Name']);
         email = (data.data()['Email']);
@@ -41,7 +42,7 @@ class ProfileDisplay extends StatelessWidget {
         flag = 1;
       }
     }
-    print(flag);
+
     if (flag == 1) {
       Navigator.push(
         context,
@@ -50,7 +51,7 @@ class ProfileDisplay extends StatelessWidget {
         ),
       );
     }
-
+    print(flag);
     print('User Id: $uid');
 
     print('Firstname=$firstname');
