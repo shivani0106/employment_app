@@ -16,7 +16,7 @@ var jobTitle = [];
 var jobDescription = [];
 int count = 0;
 
-class JobsListView extends StatelessWidget {
+class JobsListView extends StatefulWidget {
   final String selectTypeOfJob;
   final String selectTime;
   final String countryValue;
@@ -34,10 +34,18 @@ class JobsListView extends StatelessWidget {
   });
 
   @override
+  _JobsListViewState createState() => _JobsListViewState();
+}
+
+class _JobsListViewState extends State<JobsListView> {
+  @override
   Widget build(BuildContext context) {
     final seeJobsFromFirebase = Provider.of<QuerySnapshot>(context);
     print("seeJobsFromFirebase.docs:");
-
+    setState(() {
+      jobTitle.clear();
+      jobDescription.clear();
+    });
     void displayAll() {
       for (var data in seeJobsFromFirebase.docs) {
         jobTitle.add(data.data()['Job Type']);
@@ -48,11 +56,11 @@ class JobsListView extends StatelessWidget {
 //***************************Filter below***********/
     void displayFilter() {
       for (var data in seeJobsFromFirebase.docs) {
-        if (selectTypeOfJob == data.data()['Job Type'] &&
-            selectTime == data.data()['Time'] &&
-            countryValue == data.data()['Country'] &&
-            stateValue == data.data()['State'] &&
-            cityValue == data.data()['City']) {
+        if (widget.selectTypeOfJob == data.data()['Job Type'] &&
+            widget.selectTime == data.data()['Time'] &&
+            widget.countryValue == data.data()['Country'] &&
+            widget.stateValue == data.data()['State'] &&
+            widget.cityValue == data.data()['City']) {
           // adding jobs in list
           count++;
           jobTitle.add(data.data()['Job Type']);
@@ -67,20 +75,21 @@ class JobsListView extends StatelessWidget {
       }
     }
 
-    if (flag == null || flag == 0) {
+    print('jobTitle$jobTitle');
+    if (widget.flag == null || widget.flag == 0) {
       displayAll();
     } else {
       displayFilter();
     }
 
     //****************************no Data Page******************************************
-   // return NoData();
-
+    // return NoData();
 
     //*****************************List view*********************************************
     return ListView.builder(
-        itemCount:
-            (flag == null || flag == 0) ? seeJobsFromFirebase.size : count,
+        itemCount: (widget.flag == null || widget.flag == 0)
+            ? seeJobsFromFirebase.size
+            : count,
         itemBuilder: (BuildContext context, int i) {
           return InkWell(
             onTap: () => Navigator.push(

@@ -10,7 +10,8 @@ class PostedJobListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamProvider<QuerySnapshot>.value(
       value: DatabaseService().jobDetailsDisplay,
-      child: PostDisplay(),
+      child:
+          PostDisplay(jobDetailsDisplay: DatabaseService().jobDetailsDisplay),
     );
   }
 }

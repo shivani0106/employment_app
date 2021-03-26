@@ -2,11 +2,11 @@ final String countryCode = '+91';
 
 final List<String> typeOfJob = [
   'Painter',
-  'abcd',
-  'efpydgdf',
-  'sdsahjkasd',
-  'hsfjdjfksd',
-  'fjdfhds'
+  'Carpenter',
+  'Mason',
+  'Plumber',
+  'Worker',
+  'Gardener'
 ];
 
 final List<String> time = [

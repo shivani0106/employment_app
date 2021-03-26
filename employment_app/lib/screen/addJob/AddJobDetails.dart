@@ -18,8 +18,6 @@ bool showSpinner = false;
 DatabaseService databaseService = DatabaseService();
 
 class AddJobDetails extends StatefulWidget {
-  AddJobDetails();
-
   @override
   _AddJobDetailsState createState() => _AddJobDetailsState();
 }
@@ -60,12 +58,12 @@ class _AddJobDetailsState extends State<AddJobDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: primaryColor,
-          title: Text('Create Job'),
-        ),
-        body: SingleChildScrollView(
-            child: ModalProgressHUD(
+      appBar: AppBar(
+        backgroundColor: primaryColor,
+        title: Text('Create Job'),
+      ),
+      body: SingleChildScrollView(
+        child: ModalProgressHUD(
           inAsyncCall: showSpinner,
           child: Container(
             padding: EdgeInsets.fromLTRB(
@@ -208,7 +206,7 @@ class _AddJobDetailsState extends State<AddJobDetails> {
                       autofocus: false,
                       autocorrect: true,
                       decoration: InputDecoration(
-                          labelText: 'Job Discription',
+                          labelText: 'Job Description',
                           labelStyle: regularPrimaryColorSemiBold()),
                       textInputAction: TextInputAction.next,
                     ),
@@ -260,14 +258,17 @@ class _AddJobDetailsState extends State<AddJobDetails> {
                                   msg: 'Post Added');
                             }
                             Navigator.pushAndRemoveUntil(
-                                context, MaterialPageRoute(builder: (context) =>
-                                HomeScreen(
-                                  cityValue: cityValue,
-                                  countryValue: countryValue,
-                                  stateValue: stateValue,
-                                  selectTime: selectTime,
-                                  selectTypeOfJob: jobOfType,
-                                  flag: 0,)), (route) => false);
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomeScreen(
+                                          cityValue: cityValue,
+                                          countryValue: countryValue,
+                                          stateValue: stateValue,
+                                          selectTime: selectTime,
+                                          selectTypeOfJob: jobOfType,
+                                          flag: 0,
+                                        )),
+                                (route) => false);
                           },
                           child: Text(
                             'Submit'.toUpperCase(),
@@ -285,7 +286,9 @@ class _AddJobDetailsState extends State<AddJobDetails> {
                   ],
                 )),
           ),
-        )));
+        ),
+      ),
+    );
   }
 
   clearTextFormField() {

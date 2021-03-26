@@ -1,11 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class DatabaseService {
+  var ids = [];
   final CollectionReference addJobDetails =
       FirebaseFirestore.instance.collection('JobDetails');
 
   final CollectionReference addUserDetails =
       FirebaseFirestore.instance.collection('UserDetails');
+
+  void jobId() async {
+    final add =
+        await FirebaseFirestore.instance.collection('JobDetails').get().then(
+              (QuerySnapshot snapshot) => {
+                snapshot.docs.forEach((f) {
+                  if (!ids.contains(f.reference.id)) {
+                    ids.add(f.reference.id);
+                  }
+                }),
+              },
+            );
+  }
 
 //********************Update and create Database for Job details****************/
   Future updateAddJobDetails({
@@ -63,4 +78,43 @@ class DatabaseService {
       'Phone Number': phoneNumber
     });
   }
+
+//************************Updating data of post */
+  Future updateJobDetails(
+    String uid, {
+    String jobType,
+    String numberOfPeople,
+    String time,
+    String state,
+    String country,
+    String city,
+    String jobAddress,
+    String jobDescription,
+    int pincode,
+  }) async {
+    return await addJobDetails.doc(uid).update({
+      'UID': uid,
+      'Job Type': jobType,
+      'Number of People': numberOfPeople,
+      'Time': time,
+      'Country': country,
+      'State': state,
+      'City': city,
+      'Job Address': jobAddress,
+      'Job Description': jobDescription,
+      'Pincode': pincode
+    });
+  }
+
+  //***********************delete */
+  Future deleteJobDetails(int count) async {
+    await addJobDetails.doc(ids[count]).delete();
+    ids.removeAt(count);
+  }
+
+  void display() {
+    print('ids:$ids');
+  }
+  //************************** */
+
 }

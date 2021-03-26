@@ -14,6 +14,8 @@ var jobDescription = [];
 
 class PostDisplay extends StatelessWidget {
   int count = 0;
+  final jobDetailsDisplay;
+  PostDisplay({this.jobDetailsDisplay});
   @override
   Widget build(BuildContext context) {
     final seeJobsFromFirebase = Provider.of<QuerySnapshot>(context);
@@ -36,15 +38,19 @@ class PostDisplay extends StatelessWidget {
           itemCount: count,
           itemBuilder: (BuildContext context, int i) {
             return InkWell(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => JobPostDetails(
-                    count: i,
-                    seeJobsFromFirebase: seeJobsFromFirebase,
+              onTap: () {
+                jobTitle.clear();
+                jobDescription.clear();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => JobPostDetails(
+                        count: i,
+                        seeJobsFromFirebase: seeJobsFromFirebase,
+                        jobDetailsDisplay: jobDetailsDisplay),
                   ),
-                ),
-              ),
+                );
+              },
               child: Container(
                 padding: EdgeInsets.fromLTRB(screenWidth(context) * 0.02, 0,
                     screenWidth(context) * 0.02, 0),
