@@ -108,6 +108,8 @@ class DatabaseService {
 
   //***********************delete */
   Future deleteJobDetails(int count) async {
+    print('count : $count');
+    print('ids[count] : ${ids[count]}');
     await addJobDetails.doc(ids[count]).delete();
     ids.removeAt(count);
   }
@@ -115,6 +117,6 @@ class DatabaseService {
   void display() {
     print('ids:$ids');
   }
-  //************************** */
+  //*************************************//
 
 }

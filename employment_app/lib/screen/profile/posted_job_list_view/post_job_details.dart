@@ -15,7 +15,7 @@ var numberOfPeople = [];
 var hours = [];
 var address = [];
 
-class JobPostDetails extends StatelessWidget {
+class JobPostDetails extends StatefulWidget {
   final int count;
   final seeJobsFromFirebase;
   final jobDetailsDisplay;
@@ -23,10 +23,15 @@ class JobPostDetails extends StatelessWidget {
       {this.count, this.seeJobsFromFirebase, this.jobDetailsDisplay});
 
   @override
+  _JobPostDetailsState createState() => _JobPostDetailsState();
+}
+
+class _JobPostDetailsState extends State<JobPostDetails> {
+  @override
   Widget build(BuildContext context) {
     print("seeJobsFromFirebase.docs:");
     jobTitle.clear();
-    for (var data in seeJobsFromFirebase.docs) {
+    for (var data in widget.seeJobsFromFirebase.docs) {
       jobTitle.add(data.data()['Job Type']);
       jobDescription.add(data.data()['Job Description']);
       numberOfPeople.add(data.data()['Number of People']);
@@ -58,7 +63,7 @@ class JobPostDetails extends StatelessWidget {
                       style: largePrimaryColorsemiBold(),
                       children: [
                         TextSpan(
-                            text: jobTitle[count],
+                            text: jobTitle[widget.count],
                             style: regularBlackColorRegular())
                       ]),
                 ),
@@ -68,7 +73,7 @@ class JobPostDetails extends StatelessWidget {
                       style: largePrimaryColorsemiBold(),
                       children: [
                         TextSpan(
-                            text: numberOfPeople[count],
+                            text: numberOfPeople[widget.count],
                             style: regularBlackColorRegular())
                       ]),
                 ),
@@ -78,7 +83,7 @@ class JobPostDetails extends StatelessWidget {
                       style: largePrimaryColorsemiBold(),
                       children: [
                         TextSpan(
-                            text: hours[count],
+                            text: hours[widget.count],
                             style: regularBlackColorRegular())
                       ]),
                 ),
@@ -88,7 +93,7 @@ class JobPostDetails extends StatelessWidget {
                       style: largePrimaryColorsemiBold(),
                       children: [
                         TextSpan(
-                            text: jobDescription[count],
+                            text: jobDescription[widget.count],
                             style: regularBlackColorRegular())
                       ]),
                 ),
@@ -98,7 +103,7 @@ class JobPostDetails extends StatelessWidget {
                       style: largePrimaryColorsemiBold(),
                       children: [
                         TextSpan(
-                            text: address[count],
+                            text: address[widget.count],
                             style: regularBlackColorRegular())
                       ]),
                 ),
@@ -127,13 +132,15 @@ class JobPostDetails extends StatelessWidget {
                             style: largewhiteColorBold(),
                           ),
                           color: primaryColor,
-                          onPressed: () {
+                          onPressed: () async {
                             // Delete that post
                             // ignore: unnecessary_statements
                             databaseService.jobId();
                             databaseService.display();
-                            print('Count:$count');
-                            databaseService.deleteJobDetails(count);
+                            print('Count:${widget.count}');
+
+                            await databaseService
+                                .deleteJobDetails(widget.count);
 
                             Fluttertoast.showToast(
                               backgroundColor: primaryColor,
@@ -142,14 +149,16 @@ class JobPostDetails extends StatelessWidget {
                               toastLength: Toast.LENGTH_LONG,
                               msg: 'Deleted suceessfully',
                             );
-                            // Navigator.pushAndRemoveUntil(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => HomeScreen(
-                            //         flag: 0,
-                            //       ),
-                            //     ),
-                            //     (route) => false);
+                            setState(() {
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => HomeScreen(
+                                      flag: 0,
+                                    ),
+                                  ),
+                                  (route) => false);
+                            });
                           }),
                     ])
                 //        )
