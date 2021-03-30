@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:employment_app/home_screen.dart';
+import 'package:employment_app/screen/addJob/AddJobDetails.dart';
 import 'package:employment_app/screen/job_details/job_provider_view.dart';
 import 'package:employment_app/services/database.dart';
 import 'package:employment_app/style/Style.dart';
@@ -117,7 +118,17 @@ class _JobPostDetailsState extends State<JobPostDetails> {
                       children: [
                         FlatButton.icon(
                             color: primaryColor,
-                            onPressed: () {},
+                            onPressed: () {
+                              //Add job details
+                              // Navigator.pushAndRemoveUntil(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //       builder: (context) => AddJobDetails(
+                              //         flag: 1,
+                              //       ),
+                              //     ),
+                              //     (route) => false);
+                            },
                             icon: Icon(
                               Icons.update,
                               color: Colors.white,

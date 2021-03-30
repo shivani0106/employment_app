@@ -22,6 +22,33 @@ class DatabaseService {
             );
   }
 
+//************************Updating data of post */
+  Future updateJobDetailsAndUpdate(
+    String uid, {
+    String jobType,
+    String numberOfPeople,
+    String time,
+    String state,
+    String country,
+    String city,
+    String jobAddress,
+    String jobDescription,
+    int pincode,
+  }) async {
+    return await addJobDetails.doc(uid).update({
+      'UID': uid,
+      'Job Type': jobType,
+      'Number of People': numberOfPeople,
+      'Time': time,
+      'Country': country,
+      'State': state,
+      'City': city,
+      'Job Address': jobAddress,
+      'Job Description': jobDescription,
+      'Pincode': pincode
+    });
+  }
+
 //********************Update and create Database for Job details****************/
   Future updateAddJobDetails({
     String uid,
@@ -76,33 +103,6 @@ class DatabaseService {
       'Email': email,
       'Address': address,
       'Phone Number': phoneNumber
-    });
-  }
-
-//************************Updating data of post */
-  Future updateJobDetails(
-    String uid, {
-    String jobType,
-    String numberOfPeople,
-    String time,
-    String state,
-    String country,
-    String city,
-    String jobAddress,
-    String jobDescription,
-    int pincode,
-  }) async {
-    return await addJobDetails.doc(uid).update({
-      'UID': uid,
-      'Job Type': jobType,
-      'Number of People': numberOfPeople,
-      'Time': time,
-      'Country': country,
-      'State': state,
-      'City': city,
-      'Job Address': jobAddress,
-      'Job Description': jobDescription,
-      'Pincode': pincode
     });
   }
 

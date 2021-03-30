@@ -18,6 +18,8 @@ bool showSpinner = false;
 DatabaseService databaseService = DatabaseService();
 
 class AddJobDetails extends StatefulWidget {
+  final int flag;
+  AddJobDetails({this.flag});
   @override
   _AddJobDetailsState createState() => _AddJobDetailsState();
 }
@@ -250,6 +252,20 @@ class _AddJobDetailsState extends State<AddJobDetails> {
                                 time: selectTime,
                                 uid: uid,
                               );
+
+                              // await databaseService.updateJobDetailsAndUpdate(
+                              //   uid,
+                              //   jobType: jobOfType,
+                              //   numberOfPeople: selectPeople,
+                              //   city: cityValue,
+                              //   country: countryValue,
+                              //   state: stateValue,
+                              //   jobAddress: _jobAddressController.text,
+                              //   jobDescription: _jobdiscriptionController.text,
+                              //   pincode: int.parse(_pinCodeController.text),
+                              //   time: selectTime,
+                              // );
+
                               Fluttertoast.showToast(
                                   backgroundColor: primaryColor,
                                   textColor: Colors.white,
