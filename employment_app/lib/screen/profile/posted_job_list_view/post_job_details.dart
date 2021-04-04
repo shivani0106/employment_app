@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:employment_app/home_screen.dart';
 import 'package:employment_app/screen/addJob/AddJobDetails.dart';
 import 'package:employment_app/screen/job_details/job_provider_view.dart';
+import 'package:employment_app/screen/profile/posted_job_list_view/update_posted_job.dart';
 import 'package:employment_app/services/database.dart';
 import 'package:employment_app/style/Style.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,9 @@ var jobDescription = [];
 var numberOfPeople = [];
 var hours = [];
 var address = [];
+var city = [];
+var state = [];
+var country = [];
 bool spinKit = false;
 
 class JobPostDetails extends StatefulWidget {
@@ -40,6 +44,9 @@ class _JobPostDetailsState extends State<JobPostDetails> {
       numberOfPeople.add(data.data()['Number of People']);
       hours.add(data.data()['Time']);
       address.add(data.data()['Job Address']);
+      city.add(data.data()['City']);
+      state.add(data.data()['State']);
+      country.add(data.data()['Country']);
     }
     print(jobTitle);
     return Scaffold(
@@ -50,14 +57,20 @@ class _JobPostDetailsState extends State<JobPostDetails> {
         body: ModalProgressHUD(
           inAsyncCall: spinKit,
           child: SingleChildScrollView(
-            child: Container(
+              child: Column(children: [
+                Container(
               margin: EdgeInsets.fromLTRB(
                   screenWidth(context) * 0.05,
                   screenHeight(context) * 0.05,
                   screenWidth(context) * 0.05,
                   screenHeight(context) * 0.05),
-              height: screenHeight(context) * 0.75,
-              child: Column(
+                  height: screenHeight(context) * 0.6,
+                  width: screenWidth(context),
+                  child: Card(child:
+                  Padding(
+                    padding: EdgeInsets.only(left: screenWidth(context)*0.03),
+                      child:
+                  Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 mainAxisSize: MainAxisSize.max,
@@ -112,83 +125,106 @@ class _JobPostDetailsState extends State<JobPostDetails> {
                               style: regularBlackColorRegular())
                         ]),
                   ),
-
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        FlatButton.icon(
-                            color: primaryColor,
-                            onPressed: () {
-                              //Add job details
-                              // Navigator.pushAndRemoveUntil(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //       builder: (context) => AddJobDetails(
-                              //         flag: 1,
-                              //       ),
-                              //     ),
-                              //     (route) => false);
-                            },
-                            icon: Icon(
-                              Icons.update,
-                              color: Colors.white,
-                            ),
-                            label: Text(
-                              'Update'.toUpperCase(),
-                              style: largewhiteColorBold(),
-                            )),
-                        FlatButton.icon(
-                            icon: Icon(
-                              Icons.delete,
-                              color: Colors.white,
-                            ),
-                            label: Text(
-                              'Delete'.toUpperCase(),
-                              style: largewhiteColorBold(),
-                            ),
-                            color: primaryColor,
-                            onPressed: () async {
-                              // Delete that post
-                              // ignore: unnecessary_statements
-                              databaseService.jobId();
-                              databaseService.display();
-                              print('Count:${widget.count}');
-
-                              // setState(() {
-                              //   spinKit = true;
-                              // });
-
-                              await databaseService
-                                  .deleteJobDetails(widget.count);
-                              setState(() {
-                                spinKit = false;
-                              });
-
-                              Fluttertoast.showToast(
-                                backgroundColor: primaryColor,
-                                textColor: Colors.white,
-                                gravity: ToastGravity.BOTTOM,
-                                toastLength: Toast.LENGTH_LONG,
-                                msg: 'Deleted suceessfully',
-                              );
-                              setState(() {
-                                Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => HomeScreen(
-                                        flag: 0,
-                                      ),
-                                    ),
-                                    (route) => false);
-                              });
-                            }),
-                      ])
+                  RichText(
+                    text: TextSpan(
+                        text: 'City:',
+                        style: largePrimaryColorsemiBold(),
+                        children: [
+                          TextSpan(
+                              text: city[widget.count],
+                              style: regularBlackColorRegular())
+                        ]),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                        text: 'State:',
+                        style: largePrimaryColorsemiBold(),
+                        children: [
+                          TextSpan(
+                              text: state[widget.count],
+                              style: regularBlackColorRegular())
+                        ]),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                        text: 'Country:',
+                        style: largePrimaryColorsemiBold(),
+                        children: [
+                          TextSpan(
+                              text: country[widget.count],
+                              style: regularBlackColorRegular())
+                        ]),
+                  ),
                   //        )
                   //)
-                ],
+                ]
+                  )
               ),
             ),
           ),
-        ));
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      FlatButton.icon(
+                          color: primaryColor,
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>UpdatePostedJob()));
+                          },
+                          icon: Icon(
+                            Icons.update,
+                            color: Colors.white,
+                          ),
+                          label: Text(
+                            'Update'.toUpperCase(),
+                            style: largewhiteColorBold(),
+                          )),
+                      FlatButton.icon(
+                          icon: Icon(
+                            Icons.delete,
+                            color: Colors.white,
+                          ),
+                          label: Text(
+                            'Delete'.toUpperCase(),
+                            style: largewhiteColorBold(),
+                          ),
+                          color: primaryColor,
+                          onPressed: () async {
+                            // Delete that post
+                            // ignore: unnecessary_statements
+                            databaseService.jobId();
+                            databaseService.display();
+                            print('Count:${widget.count}');
+
+                            // setState(() {
+                            //   spinKit = true;
+                            // });
+
+                            await databaseService
+                                .deleteJobDetails(widget.count);
+                            setState(() {
+                              spinKit = false;
+                            });
+
+                            Fluttertoast.showToast(
+                              backgroundColor: primaryColor,
+                              textColor: Colors.white,
+                              gravity: ToastGravity.BOTTOM,
+                              toastLength: Toast.LENGTH_LONG,
+                              msg: 'Deleted suceessfully',
+                            );
+                            setState(() {
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        HomeScreen(
+                                          flag: 0,
+                                        ),
+                                  ),
+                                      (route) => false);
+                            });
+                          }),
+                    ])
+              ]))));
   }
 }

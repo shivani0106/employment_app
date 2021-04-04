@@ -38,11 +38,11 @@ class NavigationDrawer extends StatelessWidget {
             text: 'Profile',
             onTap: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => ProfileView()))),
-        craeteDrawerBodyItems(
+        /*craeteDrawerBodyItems(
             icons: Icons.login,
             text: 'Sign In',
             onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) => SignIn()))),
+                context, MaterialPageRoute(builder: (context) => SignIn()))),*/
         craeteDrawerBodyItems(
             icons: Icons.logout,
             text: 'Sign Out',

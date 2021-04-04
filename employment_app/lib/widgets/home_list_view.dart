@@ -14,6 +14,9 @@ import 'package:provider/provider.dart';
 // List for fetching data from firebase
 var jobTitle = [];
 var jobDescription = [];
+var city = [];
+var state = [];
+var country = [];
 int count = 0;
 
 class JobsListView extends StatefulWidget {
@@ -50,6 +53,9 @@ class _JobsListViewState extends State<JobsListView> {
       for (var data in seeJobsFromFirebase.docs) {
         jobTitle.add(data.data()['Job Type']);
         jobDescription.add(data.data()['Job Description']);
+        city.add(data.data()['City']);
+        state.add(data.data()['State']);
+        country.add(data.data()['Country']);
       }
     }
 
@@ -61,10 +67,13 @@ class _JobsListViewState extends State<JobsListView> {
             widget.countryValue == data.data()['Country'] &&
             widget.stateValue == data.data()['State'] &&
             widget.cityValue == data.data()['City']) {
-          // adding jobs in list
+          // adding jobs in lists
           count++;
           jobTitle.add(data.data()['Job Type']);
           jobDescription.add(data.data()['Job Description']);
+          city.add(data.data()['City']);
+          state.add(data.data()['State']);
+          country.add(data.data()['Country']);
           // numberOfPeople.add(data.data()['Number of People']);
           // hours.add(data.data()['Time']);
           // address.add(data.data()['Job Address']);
@@ -120,7 +129,7 @@ class _JobsListViewState extends State<JobsListView> {
                         )),
                     Container(
                       padding: EdgeInsets.fromLTRB(
-                          screenWidth(context) * 0.02,
+                          screenWidth(context) * 0.03,
                           screenHeight(context) * 0.01,
                           screenWidth(context) * 0.02,
                           screenHeight(context) * 0.01),
@@ -129,7 +138,29 @@ class _JobsListViewState extends State<JobsListView> {
                         textAlign: TextAlign.justify,
                       ),
                     ),
-                    SizedBox(height: 35,),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(
+                          screenWidth(context) * 0.03,
+                          screenHeight(context) * 0.005,
+                          screenWidth(context) * 0.02,
+                          screenHeight(context) * 0.001),
+                      child: Text(
+                        '${city[i]}, ${state[i]}',
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(
+                          screenWidth(context) * 0.03,
+                          screenHeight(context) * 0.005,
+                          screenWidth(context) * 0.02,
+                          screenHeight(context) * 0.01),
+                      child: Text(
+                        country[i],
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                   // SizedBox(height: 35,),
                     GestureDetector(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,

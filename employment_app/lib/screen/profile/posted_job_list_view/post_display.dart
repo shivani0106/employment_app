@@ -52,7 +52,7 @@ class PostDisplay extends StatelessWidget {
                 );
               },
               child: Container(
-                padding: EdgeInsets.fromLTRB(screenWidth(context) * 0.02, 0,
+                padding: EdgeInsets.fromLTRB(screenWidth(context) * 0.02, screenWidth(context)*0.02,
                     screenWidth(context) * 0.02, 0),
                 height: 150,
                 width: screenWidth(context),

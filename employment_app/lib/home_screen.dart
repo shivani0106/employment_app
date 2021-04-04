@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                   Icons.search,
                   color: Colors.white,
                 ),
-                onPressed: ()=>Navigator.push(context, CupertinoPageRoute(builder: (context)=>FindJobView()))),
+                onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>FindJobView()))),
             /*IconButton(
               icon: Icon(
                 Icons.filter_list,
