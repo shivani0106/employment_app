@@ -32,7 +32,6 @@ class DatabaseService {
                 snapshot.docs.forEach((f) {
                   if (!ids.contains(f.reference.id)) {
                     idforUpdate = f.reference.id;
-                    print(idforUpdate);
                   }
                 }),
               },
@@ -41,19 +40,11 @@ class DatabaseService {
 
 //************************Updating data of post */
   Future updateJobDetailsAndUpdate(
-      {String uid,
-      String jobType,
-      String numberOfPeople,
+      {String numberOfPeople,
       String time,
-      String state,
-      String country,
-      String city,
-      String jobAddress,
       String jobDescription,
-      int pincode,
       int count}) async {
-    return await addJobDetails.doc(uid).update({
-      'UID': uid,
+    return await addJobDetails.doc(ids[count]).update({
       // 'Job Type': jobType,
       'Number of People': numberOfPeople,
       'Time': time,

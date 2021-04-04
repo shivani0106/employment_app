@@ -166,17 +166,13 @@ class _UpdatePostedJobState extends State<UpdatePostedJob> {
                           });
                           // Firestore add data
 
-                          String idInString;
-                          databaseService.jobIdforUpdate();
-                          idInString = databaseService.displayUpdteId();
-                          print(idInString);
-                          print('Hello');
+                          databaseService.jobId();
+                          databaseService.display();
                           await databaseService.updateJobDetailsAndUpdate(
                             numberOfPeople: selectPeople,
                             jobDescription: _jobdiscriptionController.text,
                             time: selectTime,
                             count: widget.count,
-                            uid: idInString,
                           );
 
                           Fluttertoast.showToast(

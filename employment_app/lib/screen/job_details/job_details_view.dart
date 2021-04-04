@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:employment_app/screen/job_details/job_provider_view.dart';
+import 'package:employment_app/services/database.dart';
 import 'package:employment_app/style/Style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+DatabaseService databaseService = DatabaseService();
 // List for fetching data from firebase
 var jobTitle = [];
 var jobDescription = [];
@@ -35,128 +37,139 @@ class JobDetailsView extends StatelessWidget {
     }
     print(jobTitle);
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: primaryColor,
-          title: Text('Job description'),
-        ),
-        body: SingleChildScrollView(child:
-        Column(
+      appBar: AppBar(
+        backgroundColor: primaryColor,
+        title: Text('Job description'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-            margin: EdgeInsets.fromLTRB(
-                screenWidth(context) * 0.05,
-                screenHeight(context) * 0.05,
-                screenWidth(context) * 0.05,
-                screenHeight(context) * 0.05),
+                margin: EdgeInsets.fromLTRB(
+                    screenWidth(context) * 0.05,
+                    screenHeight(context) * 0.05,
+                    screenWidth(context) * 0.05,
+                    screenHeight(context) * 0.05),
                 height: screenHeight(context) * 0.6,
                 width: screenWidth(context),
-                child: Card(child:
-                Padding(
-                  padding: EdgeInsets.only(left: screenWidth(context) * 0.03),
-                  child:
-                  Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                RichText(
-                  text: TextSpan(
-                      text: 'Title: ',
-                      style: largePrimaryColorsemiBold(),
+                child: Card(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: screenWidth(context) * 0.03),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisSize: MainAxisSize.max,
                       children: [
-                        TextSpan(
-                            text: jobTitle[count],
-                            style: regularBlackColorRegular())
-                      ]),
-                ),
-                RichText(
-                  text: TextSpan(
-                      text: 'No of pepole needed:',
-                      style: largePrimaryColorsemiBold(),
-                      children: [
-                        TextSpan(
-                            text: numberOfPeople[count],
-                            style: regularBlackColorRegular())
-                      ]),
-                ),
-                RichText(
-                  text: TextSpan(
-                      text: 'Hours:',
-                      style: largePrimaryColorsemiBold(),
-                      children: [
-                        TextSpan(
-                            text: hours[count],
-                            style: regularBlackColorRegular())
-                      ]),
-                ),
-                RichText(
-                  text: TextSpan(
-                      text: 'Description:',
-                      style: largePrimaryColorsemiBold(),
-                      children: [
-                        TextSpan(
-                            text: jobDescription[count],
-                            style: regularBlackColorRegular())
-                      ]),
-                ),
-                RichText(
-                  text: TextSpan(
-                      text: 'Address:',
-                      style: largePrimaryColorsemiBold(),
-                      children: [
-                        TextSpan(
-                            text: address[count],
-                            style: regularBlackColorRegular())
-                      ]),
-                ),
-                RichText(
-                  text: TextSpan(
-                      text: 'City:',
-                      style: largePrimaryColorsemiBold(),
-                      children: [
-                        TextSpan(
-                            text: city[count],
-                            style: regularBlackColorRegular())
-                      ]),
-                ),
-                RichText(
-                  text: TextSpan(
-                      text: 'State:',
-                      style: largePrimaryColorsemiBold(),
-                      children: [
-                        TextSpan(
-                            text: state[count],
-                            style: regularBlackColorRegular())
-                      ]),
-                ),
-                RichText(
-                  text: TextSpan(
-                      text: 'Country:',
-                      style: largePrimaryColorsemiBold(),
-                      children: [
-                        TextSpan(
-                            text: country[count],
-                            style: regularBlackColorRegular())
-                      ]),
-                ),
-              ],
-            ),
-          ),
+                        RichText(
+                          text: TextSpan(
+                              text: 'Title: ',
+                              style: largePrimaryColorsemiBold(),
+                              children: [
+                                TextSpan(
+                                    text: jobTitle[count],
+                                    style: regularBlackColorRegular())
+                              ]),
+                        ),
+                        RichText(
+                          text: TextSpan(
+                              text: 'No of pepole needed:',
+                              style: largePrimaryColorsemiBold(),
+                              children: [
+                                TextSpan(
+                                    text: numberOfPeople[count],
+                                    style: regularBlackColorRegular())
+                              ]),
+                        ),
+                        RichText(
+                          text: TextSpan(
+                              text: 'Hours:',
+                              style: largePrimaryColorsemiBold(),
+                              children: [
+                                TextSpan(
+                                    text: hours[count],
+                                    style: regularBlackColorRegular())
+                              ]),
+                        ),
+                        RichText(
+                          text: TextSpan(
+                              text: 'Description:',
+                              style: largePrimaryColorsemiBold(),
+                              children: [
+                                TextSpan(
+                                    text: jobDescription[count],
+                                    style: regularBlackColorRegular())
+                              ]),
+                        ),
+                        RichText(
+                          text: TextSpan(
+                              text: 'Address:',
+                              style: largePrimaryColorsemiBold(),
+                              children: [
+                                TextSpan(
+                                    text: address[count],
+                                    style: regularBlackColorRegular())
+                              ]),
+                        ),
+                        RichText(
+                          text: TextSpan(
+                              text: 'City:',
+                              style: largePrimaryColorsemiBold(),
+                              children: [
+                                TextSpan(
+                                    text: city[count],
+                                    style: regularBlackColorRegular())
+                              ]),
+                        ),
+                        RichText(
+                          text: TextSpan(
+                              text: 'State:',
+                              style: largePrimaryColorsemiBold(),
+                              children: [
+                                TextSpan(
+                                    text: state[count],
+                                    style: regularBlackColorRegular())
+                              ]),
+                        ),
+                        RichText(
+                          text: TextSpan(
+                              text: 'Country:',
+                              style: largePrimaryColorsemiBold(),
+                              children: [
+                                TextSpan(
+                                    text: country[count],
+                                    style: regularBlackColorRegular())
+                              ]),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               FlatButton(
-                  color: primaryColor,
-                  onPressed: () =>
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => JobProviderView())),
-                  child: Text(
-                    'Click to see Provider Details'.toUpperCase(),
-                    style: largewhiteColorBold(),
-                  ))
-            ])));
+                color: primaryColor,
+                onPressed: () {
+                  String idInString;
+                  databaseService.jobIdforUpdate();
+                  idInString = databaseService.displayUpdteId();
+                  print(idInString);
+                  print('Hello');
+
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => JobProviderView(),
+                  //   ),
+                  // );
+                },
+                child: Text(
+                  'Click to see Provider Details'.toUpperCase(),
+                  style: largewhiteColorBold(),
+                ),
+              )
+            ]),
+      ),
+    );
   }
 }
