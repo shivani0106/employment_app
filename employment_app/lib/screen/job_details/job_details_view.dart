@@ -15,6 +15,7 @@ var address = [];
 var city = [];
 var state = [];
 var country = [];
+var userids = [];
 
 class JobDetailsView extends StatelessWidget {
   final int count;
@@ -34,6 +35,7 @@ class JobDetailsView extends StatelessWidget {
       city.add(data.data()['City']);
       state.add(data.data()['State']);
       country.add(data.data()['Country']);
+      userids.add(data.data()['UID']);
     }
     print(jobTitle);
     return Scaffold(
@@ -150,18 +152,13 @@ class JobDetailsView extends StatelessWidget {
               FlatButton(
                 color: primaryColor,
                 onPressed: () {
-                  String idInString;
-                  databaseService.jobIdforUpdate();
-                  idInString = databaseService.displayUpdteId();
-                  print(idInString);
-                  print('Hello');
-
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => JobProviderView(),
-                  //   ),
-                  // );
+                  //print('UserId: ${userids[count]}');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => JobProviderView(userids[count]),
+                    ),
+                  );
                 },
                 child: Text(
                   'Click to see Provider Details'.toUpperCase(),
