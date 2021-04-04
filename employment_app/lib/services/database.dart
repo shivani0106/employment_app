@@ -3,19 +3,36 @@ import 'package:flutter/material.dart';
 
 class DatabaseService {
   var ids = [];
+  String idforUpdate;
   final CollectionReference addJobDetails =
       FirebaseFirestore.instance.collection('JobDetails');
 
   final CollectionReference addUserDetails =
       FirebaseFirestore.instance.collection('UserDetails');
 
-  void jobId() async {
+  Future<String> jobId() async {
     final add =
         await FirebaseFirestore.instance.collection('JobDetails').get().then(
               (QuerySnapshot snapshot) => {
                 snapshot.docs.forEach((f) {
                   if (!ids.contains(f.reference.id)) {
                     ids.add(f.reference.id);
+                    // print(ids);
+
+                  }
+                }),
+              },
+            );
+  }
+
+  void jobIdforUpdate() async {
+    final add =
+        await FirebaseFirestore.instance.collection('JobDetails').get().then(
+              (QuerySnapshot snapshot) => {
+                snapshot.docs.forEach((f) {
+                  if (!ids.contains(f.reference.id)) {
+                    idforUpdate = f.reference.id;
+                    print(idforUpdate);
                   }
                 }),
               },
@@ -24,28 +41,28 @@ class DatabaseService {
 
 //************************Updating data of post */
   Future updateJobDetailsAndUpdate(
-    String uid, {
-    String jobType,
-    String numberOfPeople,
-    String time,
-    String state,
-    String country,
-    String city,
-    String jobAddress,
-    String jobDescription,
-    int pincode,
-  }) async {
+      {String uid,
+      String jobType,
+      String numberOfPeople,
+      String time,
+      String state,
+      String country,
+      String city,
+      String jobAddress,
+      String jobDescription,
+      int pincode,
+      int count}) async {
     return await addJobDetails.doc(uid).update({
       'UID': uid,
-      'Job Type': jobType,
+      // 'Job Type': jobType,
       'Number of People': numberOfPeople,
       'Time': time,
-      'Country': country,
-      'State': state,
-      'City': city,
-      'Job Address': jobAddress,
+      // 'Country': country,
+      // 'State': state,
+      // 'City': city,
+      // 'Job Address': jobAddress,
       'Job Description': jobDescription,
-      'Pincode': pincode
+      // 'Pincode': pincode
     });
   }
 
@@ -116,6 +133,11 @@ class DatabaseService {
 
   void display() {
     print('ids:$ids');
+  }
+
+  String displayUpdteId() {
+    print('idforUpdate:$idforUpdate');
+    return idforUpdate;
   }
   //*************************************//
 

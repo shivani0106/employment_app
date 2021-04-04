@@ -253,19 +253,6 @@ class _AddJobDetailsState extends State<AddJobDetails> {
                                 uid: uid,
                               );
 
-                              // await databaseService.updateJobDetailsAndUpdate(
-                              //   uid,
-                              //   jobType: jobOfType,
-                              //   numberOfPeople: selectPeople,
-                              //   city: cityValue,
-                              //   country: countryValue,
-                              //   state: stateValue,
-                              //   jobAddress: _jobAddressController.text,
-                              //   jobDescription: _jobdiscriptionController.text,
-                              //   pincode: int.parse(_pinCodeController.text),
-                              //   time: selectTime,
-                              // );
-
                               Fluttertoast.showToast(
                                   backgroundColor: primaryColor,
                                   textColor: Colors.white,
