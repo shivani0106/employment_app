@@ -10,6 +10,9 @@ var jobDescription = [];
 var numberOfPeople = [];
 var hours = [];
 var address = [];
+var city = [];
+var state = [];
+var country = [];
 
 class JobDetailsView extends StatelessWidget {
   final int count;
@@ -26,6 +29,9 @@ class JobDetailsView extends StatelessWidget {
       numberOfPeople.add(data.data()['Number of People']);
       hours.add(data.data()['Time']);
       address.add(data.data()['Job Address']);
+      city.add(data.data()['City']);
+      state.add(data.data()['State']);
+      country.add(data.data()['Country']);
     }
     print(jobTitle);
     return Scaffold(
@@ -33,15 +39,24 @@ class JobDetailsView extends StatelessWidget {
           backgroundColor: primaryColor,
           title: Text('Job description'),
         ),
-        body: SingleChildScrollView(
-          child: Container(
+        body: SingleChildScrollView(child:
+        Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
             margin: EdgeInsets.fromLTRB(
                 screenWidth(context) * 0.05,
                 screenHeight(context) * 0.05,
                 screenWidth(context) * 0.05,
                 screenHeight(context) * 0.05),
-            height: screenHeight(context) * 0.75,
-            child: Column(
+                height: screenHeight(context) * 0.6,
+                width: screenWidth(context),
+                child: Card(child:
+                Padding(
+                  padding: EdgeInsets.only(left: screenWidth(context) * 0.03),
+                  child:
+                  Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               mainAxisSize: MainAxisSize.max,
@@ -96,20 +111,52 @@ class JobDetailsView extends StatelessWidget {
                             style: regularBlackColorRegular())
                       ]),
                 ),
-                Center(
-                    child: FlatButton(
-                        color: primaryColor,
-                        onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => JobProviderView())),
-                        child: Text(
-                          'Click to see Provider Details'.toUpperCase(),
-                          style: largewhiteColorBold(),
-                        )))
+                RichText(
+                  text: TextSpan(
+                      text: 'City:',
+                      style: largePrimaryColorsemiBold(),
+                      children: [
+                        TextSpan(
+                            text: city[count],
+                            style: regularBlackColorRegular())
+                      ]),
+                ),
+                RichText(
+                  text: TextSpan(
+                      text: 'State:',
+                      style: largePrimaryColorsemiBold(),
+                      children: [
+                        TextSpan(
+                            text: state[count],
+                            style: regularBlackColorRegular())
+                      ]),
+                ),
+                RichText(
+                  text: TextSpan(
+                      text: 'Country:',
+                      style: largePrimaryColorsemiBold(),
+                      children: [
+                        TextSpan(
+                            text: country[count],
+                            style: regularBlackColorRegular())
+                      ]),
+                ),
               ],
             ),
           ),
-        ));
+                ),
+              ),
+              FlatButton(
+                  color: primaryColor,
+                  onPressed: () =>
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => JobProviderView())),
+                  child: Text(
+                    'Click to see Provider Details'.toUpperCase(),
+                    style: largewhiteColorBold(),
+                  ))
+            ])));
   }
 }

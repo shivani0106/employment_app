@@ -102,13 +102,14 @@ class _JobsListViewState extends State<JobsListView> {
               ),
             ),
             child: Container(
-              padding: EdgeInsets.fromLTRB(screenWidth(context) * 0.02, 0,
+              padding: EdgeInsets.fromLTRB(screenWidth(context) * 0.02, screenHeight(context)*0.01,
                   screenWidth(context) * 0.02, 0),
               height: 150,
               width: screenWidth(context),
               child: Card(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+
                   children: [
                     Container(
                         padding:
@@ -128,6 +129,7 @@ class _JobsListViewState extends State<JobsListView> {
                         textAlign: TextAlign.justify,
                       ),
                     ),
+                    SizedBox(height: 35,),
                     GestureDetector(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
