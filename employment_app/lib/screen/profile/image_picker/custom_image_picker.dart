@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class CustomImagePicker extends StatefulWidget {
   @override
@@ -114,6 +116,9 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
       setState(() {
         _imageFile = pickedFile;
       });
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('user_image', pickedFile.path);
+
     } catch (e) {
       setState(() {
         _pickImageError = e;

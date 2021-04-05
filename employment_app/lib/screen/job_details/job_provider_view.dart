@@ -35,10 +35,6 @@ class _JobProviderViewState extends State<JobProviderView> {
     // }
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: primaryColor,
-        title: Text('Provider Details'),
-      ),
       body: StreamBuilder(
         stream:
             FirebaseFirestore.instance.collection('UserDetails').snapshots(),
@@ -52,13 +48,13 @@ class _JobProviderViewState extends State<JobProviderView> {
             children: snapshot.data.docs.map((document) {
               if (document['UID'] == widget.userId) {
                 firstname = document['First Name'];
-                mobile = document['Phone Number'];
+               // mobile = document['Phone Number'];
 
-                print('firstname: $firstname');
-                print('mobile: $mobile');
+                //print('firstname: $firstname');
+                //print('mobile: $mobile');
               }
               return Container(
-                child: Center(child: Text(document['First Name'])),
+                child: Center(child: Text(firstname)),
               );
             }).toList(),
           );

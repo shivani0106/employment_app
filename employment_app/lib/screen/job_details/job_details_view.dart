@@ -3,7 +3,8 @@ import 'package:employment_app/screen/job_details/job_provider_view.dart';
 import 'package:employment_app/services/database.dart';
 import 'package:employment_app/style/Style.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
 
 DatabaseService databaseService = DatabaseService();
 // List for fetching data from firebase
@@ -153,10 +154,18 @@ class JobDetailsView extends StatelessWidget {
                 color: primaryColor,
                 onPressed: () {
                   //print('UserId: ${userids[count]}');
-                  Navigator.push(
+                  /*Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => JobProviderView(userids[count]),
+                    ),
+                  );*/
+
+                  showMaterialModalBottomSheet(
+                    context: context,
+                    builder: (context) => Container(
+                      height: screenHeight(context)*0.25,
+                      child:JobProviderView(userids[count])
                     ),
                   );
                 },
