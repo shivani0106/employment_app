@@ -154,20 +154,21 @@ class JobDetailsView extends StatelessWidget {
                 color: primaryColor,
                 onPressed: () {
                   //print('UserId: ${userids[count]}');
-                  /*Navigator.push(
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => JobProviderView(userids[count]),
                     ),
-                  );*/
+                  );
 
-                  showMaterialModalBottomSheet(
+                  /*showMaterialModalBottomSheet(
                     context: context,
                     builder: (context) => Container(
                       height: screenHeight(context)*0.25,
-                      child:JobProviderView(userids[count])
+                      child: JobProviderView()
                     ),
-                  );
+                  );*/
+
                 },
                 child: Text(
                   'Click to see Provider Details'.toUpperCase(),

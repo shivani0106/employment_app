@@ -4,6 +4,8 @@ import 'package:employment_app/screen/profile/profile_display.dart';
 import 'package:employment_app/style/Style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:employment_app/demo.dart';
+import 'job_details_view.dart';
 
 //******************Variable for first name and mobile number */
 
@@ -44,20 +46,24 @@ class _JobProviderViewState extends State<JobProviderView> {
               child: CircularProgressIndicator(),
             );
           }
-          return ListView(
-            children: snapshot.data.docs.map((document) {
-              if (document['UID'] == widget.userId) {
-                firstname = document['First Name'];
-                mobile = document['Phone Number'];
+          List<Text> names =[];
 
-                print('firstname: $firstname');
-                print('mobile: $mobile');
-              }
-              return Container(
-                child: Center(child: Text(firstname)),
-              );
-            }).toList(),
-          );
+          for (var message in snapshot.data.docs) {
+            if (message['UID'] == widget.userId) {
+              firstname = message['First Name'];
+              mobile = message['Phone Number'];
+
+              final nameAdd = Text('First Name: $firstname');
+
+              names.add(nameAdd);
+              print('firstname: $firstname');
+              print('mobile: $mobile');
+
+              //Navigator.push(context, MaterialPageRoute(builder: (context)=> Demo(firstname: firstname,)));
+            }
+          }
+          return Column(children: names);
+
         },
       ),
     );
