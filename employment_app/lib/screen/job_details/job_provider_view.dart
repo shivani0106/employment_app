@@ -46,24 +46,20 @@ class _JobProviderViewState extends State<JobProviderView> {
               child: CircularProgressIndicator(),
             );
           }
-          List<Text> names =[];
+          return ListView(
+            children: snapshot.data.docs.map((document) {
+              if (document['UID'] == widget.userId) {
+                firstname = document['First Name'];
+                mobile = document['Phone Number'];
 
-          for (var message in snapshot.data.docs) {
-            if (message['UID'] == widget.userId) {
-              firstname = message['First Name'];
-              mobile = message['Phone Number'];
-
-              final nameAdd = Text('First Name: $firstname');
-
-              names.add(nameAdd);
-              print('firstname: $firstname');
-              print('mobile: $mobile');
-
-              //Navigator.push(context, MaterialPageRoute(builder: (context)=> Demo(firstname: firstname,)));
-            }
-          }
-          return Column(children: names);
-
+                print('firstname: $firstname');
+                print('mobile: $mobile');
+              }
+              return Container(
+                child: Center(child: Text(document['First Name'])),
+              );
+            }).toList(),
+          );
         },
       ),
     );
