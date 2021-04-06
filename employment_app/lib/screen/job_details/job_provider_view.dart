@@ -11,21 +11,18 @@ import 'job_details_view.dart';
 
 String firstname = '';
 String mobile = '';
+int count = 0;
 
 //*************************Above variable */
 
-class JobProviderView extends StatefulWidget {
+class JobProviderView extends StatelessWidget {
   final String userId;
   JobProviderView(this.userId);
+  int i = 0;
 
-  @override
-  _JobProviderViewState createState() => _JobProviderViewState();
-}
-
-class _JobProviderViewState extends State<JobProviderView> {
   @override
   Widget build(BuildContext context) {
-    print('USerID: ${widget.userId}');
+    print('USerID: $userId');
     // void displayAll() {
     //   for (var data in seeUsersFromFirebase.docs) {
     //     if (data.data()['UID'] == widget.userId) {
@@ -48,15 +45,18 @@ class _JobProviderViewState extends State<JobProviderView> {
           }
           return ListView(
             children: snapshot.data.docs.map((document) {
-              if (document['UID'] == widget.userId) {
+              if (document['UID'] == userId) {
                 firstname = document['First Name'];
                 mobile = document['Phone Number'];
 
                 print('firstname: $firstname');
                 print('mobile: $mobile');
               }
-              return Container(
-                child: Center(child: Text(document['First Name'])),
+              return Column(
+                children: [
+                  Text(firstname),
+                  Text(mobile),
+                ],
               );
             }).toList(),
           );
