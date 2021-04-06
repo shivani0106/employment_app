@@ -52,12 +52,14 @@ class JobProviderView extends StatelessWidget {
                 print('firstname: $firstname');
                 print('mobile: $mobile');
               }
-              return Column(
-                children: [
-                  Text(firstname),
-                  Text(mobile),
-                ],
-              );
+              return document['UID'] == userId
+                  ? Column(
+                      children: [
+                        Text(firstname),
+                        Text(mobile),
+                      ],
+                    )
+                  : Container();
             }).toList(),
           );
         },
