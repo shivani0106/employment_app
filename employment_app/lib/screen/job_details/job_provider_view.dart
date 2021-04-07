@@ -53,12 +53,52 @@ class JobProviderView extends StatelessWidget {
                 print('mobile: $mobile');
               }
               return document['UID'] == userId
-                  ? Column(
-                      children: [
-                        Text(firstname),
-                        Text(mobile),
-                      ],
+                  ? Container(
+                margin: EdgeInsets.only(left:10,right: 10),
+                  child:
+
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(bottom: 10),
+                            child: Text('Provider Details',style: largePrimaryColorsemiBold(),),),
+                          Container(
+                            height: 110,
+                            child:
+                          Card(child:
+                              Container(
+                                padding: EdgeInsets.only(left:20),
+                                  child:
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                  text: 'Name:',
+                                  style: largePrimaryColorsemiBold(),
+                                  children: [
+                                    TextSpan(
+                                        text: firstname,
+                                        style: regularBlackColorRegular())
+                                  ]),
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                  text: 'Contact no:',
+                                  style: largePrimaryColorsemiBold(),
+                                  children: [
+                                    TextSpan(
+                                        text: mobile,
+                                        style: regularBlackColorRegular())
+                                  ]),
+                            ),
+                          ],
                     )
+              ),))
+                        ],
+                      ))
                   : Container();
             }).toList(),
           );
