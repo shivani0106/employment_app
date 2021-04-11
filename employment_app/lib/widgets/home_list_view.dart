@@ -1,14 +1,7 @@
-import 'package:employment_app/globals/Globals.dart';
-import 'package:employment_app/screen/no_data/no_data_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:employment_app/screen/job_details/job_details_view.dart';
-import 'package:employment_app/auth/authenticate.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:employment_app/services/database.dart';
+import 'package:employment_app/screen/job_details/job_details_view.dart';
 import 'package:employment_app/style/Style.dart';
-import 'package:employment_app/widgets/NavigationDrawer.dart';
-import 'package:employment_app/widgets/home_list_view.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 // List for fetching data from firebase
@@ -111,14 +104,13 @@ class _JobsListViewState extends State<JobsListView> {
               ),
             ),
             child: Container(
-              padding: EdgeInsets.fromLTRB(screenWidth(context) * 0.02, screenHeight(context)*0.01,
-                  screenWidth(context) * 0.02, 0),
+              padding: EdgeInsets.fromLTRB(screenWidth(context) * 0.02,
+                  screenHeight(context) * 0.01, screenWidth(context) * 0.02, 0),
               height: 150,
               width: screenWidth(context),
               child: Card(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-
                   children: [
                     Container(
                         padding:
@@ -127,15 +119,18 @@ class _JobsListViewState extends State<JobsListView> {
                           jobTitle[i],
                           style: largePrimaryColorsemiBold(),
                         )),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(
-                          screenWidth(context) * 0.03,
-                          screenHeight(context) * 0.01,
-                          screenWidth(context) * 0.02,
-                          screenHeight(context) * 0.01),
-                      child: Text(
-                        jobDescription[i],
-                        textAlign: TextAlign.justify,
+                    Flexible(
+                      child: Container(
+                        padding: EdgeInsets.fromLTRB(
+                            screenWidth(context) * 0.03,
+                            screenHeight(context) * 0.01,
+                            screenWidth(context) * 0.02,
+                            screenHeight(context) * 0.01),
+                        child: Text(
+                          jobDescription[i],
+                          maxLines: 2,
+                          textAlign: TextAlign.justify,
+                        ),
                       ),
                     ),
                     Container(
@@ -160,7 +155,7 @@ class _JobsListViewState extends State<JobsListView> {
                         textAlign: TextAlign.justify,
                       ),
                     ),
-                   // SizedBox(height: 35,),
+                    // SizedBox(height: 35,),
                     GestureDetector(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,

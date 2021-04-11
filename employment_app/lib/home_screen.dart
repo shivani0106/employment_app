@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:employment_app/screen/findJob/find_job_view.dart';
 import 'package:employment_app/services/database.dart';
 import 'package:employment_app/style/Style.dart';
 import 'package:employment_app/widgets/NavigationDrawer.dart';
@@ -7,7 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:employment_app/screen/findJob/find_job_view.dart';
+
 String userId;
 
 class HomeScreen extends StatelessWidget {
@@ -41,6 +42,7 @@ class HomeScreen extends StatelessWidget {
     print('flag=$flag');
     print('Home uid:${inputData()}');
     return StreamProvider<QuerySnapshot>.value(
+      initialData: null,
       value: DatabaseService().jobDetailsDisplay,
       child: Scaffold(
         appBar: AppBar(
@@ -53,7 +55,8 @@ class HomeScreen extends StatelessWidget {
                   Icons.search,
                   color: Colors.white,
                 ),
-                onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>FindJobView()))),
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => FindJobView()))),
             /*IconButton(
               icon: Icon(
                 Icons.filter_list,

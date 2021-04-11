@@ -1,4 +1,3 @@
-import 'package:employment_app/auth/authenticate.dart';
 import 'package:employment_app/globals/Globals.dart';
 import 'package:employment_app/globals/validation.dart';
 import 'package:employment_app/home_screen.dart';
@@ -58,6 +57,15 @@ class _AddJobDetailsState extends State<AddJobDetails> {
   String cityValue;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      showSpinner = false;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -65,9 +73,9 @@ class _AddJobDetailsState extends State<AddJobDetails> {
         title: Text('Create Job'),
       ),
       body: ModalProgressHUD(
-          inAsyncCall: showSpinner,
-          child:SingleChildScrollView(child:
-          Container(
+        inAsyncCall: showSpinner,
+        child: SingleChildScrollView(
+          child: Container(
             padding: EdgeInsets.fromLTRB(
                 screenWidth(context) * 0.05,
                 screenHeight(context) * 0.03,
@@ -259,19 +267,20 @@ class _AddJobDetailsState extends State<AddJobDetails> {
                                   gravity: ToastGravity.BOTTOM,
                                   toastLength: Toast.LENGTH_LONG,
                                   msg: 'Post Added');
+
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomeScreen(
+                                            cityValue: cityValue,
+                                            countryValue: countryValue,
+                                            stateValue: stateValue,
+                                            selectTime: selectTime,
+                                            selectTypeOfJob: jobOfType,
+                                            flag: 0,
+                                          )),
+                                  (route) => false);
                             }
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomeScreen(
-                                          cityValue: cityValue,
-                                          countryValue: countryValue,
-                                          stateValue: stateValue,
-                                          selectTime: selectTime,
-                                          selectTypeOfJob: jobOfType,
-                                          flag: 0,
-                                        )),
-                                (route) => false);
                           },
                           child: Text(
                             'Submit'.toUpperCase(),
