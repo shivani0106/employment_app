@@ -106,7 +106,7 @@ class _JobsListViewState extends State<JobsListView> {
             child: Container(
               padding: EdgeInsets.fromLTRB(screenWidth(context) * 0.02,
                   screenHeight(context) * 0.01, screenWidth(context) * 0.02, 0),
-              height: 150,
+              //height: 150,
               width: screenWidth(context),
               child: Card(
                 child: Column(
@@ -119,18 +119,16 @@ class _JobsListViewState extends State<JobsListView> {
                           jobTitle[i],
                           style: largePrimaryColorsemiBold(),
                         )),
-                    Flexible(
-                      child: Container(
-                        padding: EdgeInsets.fromLTRB(
-                            screenWidth(context) * 0.03,
-                            screenHeight(context) * 0.01,
-                            screenWidth(context) * 0.02,
-                            screenHeight(context) * 0.01),
-                        child: Text(
-                          jobDescription[i],
-                          maxLines: 2,
-                          textAlign: TextAlign.justify,
-                        ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(
+                          screenWidth(context) * 0.03,
+                          screenHeight(context) * 0.01,
+                          screenWidth(context) * 0.02,
+                          screenHeight(context) * 0.01),
+                      child: Text(
+                        jobDescription[i],
+                        maxLines: 2,
+                        textAlign: TextAlign.justify,
                       ),
                     ),
                     Container(
@@ -165,7 +163,8 @@ class _JobsListViewState extends State<JobsListView> {
                           Container(
                               // decoration: BoxDecoration(color: primaryColor),
                               padding: EdgeInsets.only(
-                                  right: screenWidth(context) * 0.03),
+                                  right: screenWidth(context) * 0.03,
+                                  bottom: screenHeight(context) * 0.01),
                               alignment: Alignment.bottomRight,
                               child: Text(
                                 'View',
